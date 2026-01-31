@@ -17,9 +17,9 @@ public class SamplePuzzle : Puzzle
         }
         else
         {
-            youSuck.SetActive(true);
             //he says that you suck
-            Debug.Log("You suck");
+            youSuck.SetActive(true);
+            //play air horn sound effect or something
         }
     }
 }
