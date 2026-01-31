@@ -24,8 +24,9 @@ public class AlienManager : MonoBehaviour
     private HelmetHandler helmetHandler;
     
     private NavMeshAgent agent;
-    private float viewConeAngle = 35f;
+    private float viewConeAngle = 45f;
     private float viewConeRange = 20f;
+    private float minimumProximity = 1f;
     
     private bool findingChild;
     private float childCareTime = 5f;
@@ -72,6 +73,8 @@ public class AlienManager : MonoBehaviour
                 Debug.Log("changing state to patrol");
                 break;
             case ManagerState.Tending:
+                agent.isStopped = true;
+                agent.ResetPath();
                 findingChild = false;
                 Debug.Log("changing state to tending");
                 break;
@@ -92,16 +95,13 @@ public class AlienManager : MonoBehaviour
     private void CheckRemainingDistance()
     {
         float dist = agent.remainingDistance;
-        if (dist != Mathf.Infinity 
-            && agent.pathStatus == NavMeshPathStatus.PathComplete)
+        if (dist != Mathf.Infinity && agent.pathStatus == NavMeshPathStatus.PathComplete)
         {
-            if (findingChild)
+            if (findingChild && agent.remainingDistance <= minimumProximity)
             {
-                findingChild = false;
                 HandleStateChange(ManagerState.Tending);
             }
-
-            else
+            else if(agent.remainingDistance == 0)
             {
                 SetNewPatrolPoint();
             }
@@ -124,7 +124,7 @@ public class AlienManager : MonoBehaviour
         float distToPlayer = agent.remainingDistance;
         if (distToPlayer != Mathf.Infinity 
             && agent.pathStatus == NavMeshPathStatus.PathComplete 
-            && agent.remainingDistance == 0)
+            && agent.remainingDistance <= minimumProximity)
         {
             HandleStateChange(ManagerState.Abduct);
         }
@@ -136,9 +136,30 @@ public class AlienManager : MonoBehaviour
     }
     
     #endregion
+
+    public void AlertTaskFail()
+    {
+        HandleStateChange(ManagerState.Chase);
+    }
+    
+    public void AlertAbuse()
+    {
+        Vector3 directionToPlayer = (player.position - transform.position).normalized; //get the direction again lol
+
+        float angleToPlayer = Vector3.Angle(transform.forward, directionToPlayer);
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+        
+        // player is in view
+        if (angleToPlayer <= viewConeAngle / 2f && distanceToPlayer <= viewConeRange)
+        {
+            HandleStateChange(ManagerState.Chase);
+        }
+    }
+    
     public void AlertCry(Vector3 pos)
     {
         Debug.Log("baby alert");
+        agent.ResetPath();
         agent.SetDestination(pos);
         findingChild = true;
     }
@@ -172,22 +193,9 @@ public class AlienManager : MonoBehaviour
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
         
         // player is in view
-        if(angleToPlayer <= viewConeAngle / 2f && distanceToPlayer <= viewConeRange)
+        if(angleToPlayer <= viewConeAngle / 2f && distanceToPlayer <= viewConeRange && !helmetHandler.GetIsHelmetOn())
         {
-            // mask not on
-            if (!helmetHandler.GetIsHelmetOn())
-            {
-                HandleStateChange(ManagerState.Chase);
-            }
-
-            // child abuse
-            foreach (var child in children)
-            {
-                if (child.abused)
-                {
-                    HandleStateChange(ManagerState.Chase);
-                }
-            }
+            HandleStateChange(ManagerState.Chase);
         }
     }
     

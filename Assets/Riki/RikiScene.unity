@@ -634,7 +634,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6492233874519588978, guid: 0849f9a647383c64cb63261bd65c4fd9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.19
       objectReference: {fileID: 0}
     - target: {fileID: 6492233874519588978, guid: 0849f9a647383c64cb63261bd65c4fd9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -672,36 +672,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerCharacter
       objectReference: {fileID: 0}
-    - target: {fileID: 8251390332749819645, guid: 0849f9a647383c64cb63261bd65c4fd9, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
+    - target: {fileID: 8287195384670376449, guid: 0849f9a647383c64cb63261bd65c4fd9, type: 3}
+      propertyPath: manager
+      value: 
+      objectReference: {fileID: 2014566312}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8251390332749819645, guid: 0849f9a647383c64cb63261bd65c4fd9, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 585761574}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0849f9a647383c64cb63261bd65c4fd9, type: 3}
---- !u!1 &585761573 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8251390332749819645, guid: 0849f9a647383c64cb63261bd65c4fd9, type: 3}
-  m_PrefabInstance: {fileID: 585761572}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &585761574
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 585761573}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e97b6408b5147ba8105fa823efcf35f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Manager.InteractHandler
-  manager: {fileID: 2014566312}
 --- !u!1 &661139153
 GameObject:
   m_ObjectHideFlags: 0
@@ -1523,6 +1502,10 @@ PrefabInstance:
       propertyPath: 'patrolPoints.Array.data[3]'
       value: 
       objectReference: {fileID: 764916024}
+    - target: {fileID: 2167203260857709330, guid: e1c96d0ec72dc344ca3973aadb37a3b0, type: 3}
+      propertyPath: m_Radius
+      value: 0.67
+      objectReference: {fileID: 0}
     - target: {fileID: 4371839257877305782, guid: e1c96d0ec72dc344ca3973aadb37a3b0, type: 3}
       propertyPath: m_LocalScale.y
       value: 0.5
@@ -1652,6 +1635,10 @@ PrefabInstance:
       propertyPath: 'patrolPoints.Array.data[3]'
       value: 
       objectReference: {fileID: 764916024}
+    - target: {fileID: 8099811424213763242, guid: 12719faaf6810fe4686118b019d5d3bc, type: 3}
+      propertyPath: m_Radius
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

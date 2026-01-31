@@ -16,7 +16,7 @@ namespace Manager
         public ChildState state = ChildState.Patrol;
         
         public bool abused;
-        public float recoverTime = 5f;
+        public float recoverTime = 4f;
         public float timeElapsed;
         
         private int patrolIdx;
@@ -29,6 +29,7 @@ namespace Manager
         private NavMeshAgent agent;
         private float viewConeAngle = 30f;
         private float viewConeRange = 10f;
+        private float minimumProximity = 5f;
       
         public void Start()
         {
@@ -65,10 +66,15 @@ namespace Manager
                     abused = false;
                     SetNewPatrolPoint();
                     break;
+                case ChildState.Abused:
+                    abused = true;
+                    manager.AlertAbuse();
+                    break;
                 case ChildState.Cry:
                     abused = false;
                     agent.isStopped = true;
                     agent.ResetPath();
+                    manager.AlertCry(transform.position);
                     break;
             }
         }
@@ -78,7 +84,7 @@ namespace Manager
             float dist = agent.remainingDistance;
             if (dist != Mathf.Infinity 
                 && agent.pathStatus == NavMeshPathStatus.PathComplete 
-                && agent.remainingDistance == 0)
+                && agent.remainingDistance <= minimumProximity)
             {
                 SetNewPatrolPoint();
             }
@@ -100,9 +106,7 @@ namespace Manager
         }
         public void Abuse()
         {
-            abused = true;
-            manager.AlertCry(transform.position);
-            HandleStateChange(ChildState.Cry);
+            HandleStateChange(ChildState.Abused);
         }
 
         public void Tend()
