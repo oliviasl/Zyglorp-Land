@@ -30,5 +30,9 @@ public class HelmetHandler : MonoBehaviour
         helmetUICanvas.enabled = !_bIsHelmetOn;
         _bIsHelmetOn = !_bIsHelmetOn;
     }
-    
+
+    public bool GetIsHelmetOn()
+    {
+        return _bIsHelmetOn;
+    }
 }
