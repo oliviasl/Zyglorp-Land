@@ -407,7 +407,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3894477325046744803}
+      - m_Target: {fileID: 7352703733221439356}
         m_TargetAssemblyTypeName: HourglassPuzzle, Assembly-CSharp
         m_MethodName: Flip
         m_Mode: 1
@@ -1013,7 +1013,7 @@ GameObject:
   - component: {fileID: 8430228603120098743}
   - component: {fileID: 3894477325046744803}
   m_Layer: 5
-  m_Name: Hourglass
+  m_Name: Face1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1054,7 +1054,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HourglassPuzzle
   bm: {fileID: 0}
   toDisable: []
-  flipBtn: {fileID: 0}
 --- !u!1 &8180213362679274528
 GameObject:
   m_ObjectHideFlags: 0
@@ -1065,9 +1064,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3530915070158784681}
   - component: {fileID: 2782418934334848104}
-  - component: {fileID: 6255183752222886923}
+  - component: {fileID: 7352703733221439356}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: HourglassPuzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1100,7 +1099,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8180213362679274528}
   m_CullTransparentMesh: 1
---- !u!114 &6255183752222886923
+--- !u!114 &7352703733221439356
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1109,27 +1108,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 8180213362679274528}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Script: {fileID: 11500000, guid: 04c255582fd594fa3a1730e85999cf57, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.23584908, g: 0.17021184, b: 0.17021184, a: 0.99215686}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_EditorClassIdentifier: Assembly-CSharp::HourglassPuzzle
+  bm: {fileID: 0}
+  toDisable:
+  - {fileID: 4867628927062799474}
+  - {fileID: 3989511507990062015}
 --- !u!1 &8790986457616647228
 GameObject:
   m_ObjectHideFlags: 0
