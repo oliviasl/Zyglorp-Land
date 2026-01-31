@@ -1,16 +1,14 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
+using Manager;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
 public class AlienManager : MonoBehaviour
 {
-    public List<Transform> patrolPoints;    
-    public Vector3 targetPoint; 
-    public float proximityRadius = 20f; 
-    public float childCareTime = 5f;
+    public List<Child> children; 
+    public List<Transform> patrolPoints;
     public enum ManagerState
     {
         Patrol,
@@ -20,14 +18,18 @@ public class AlienManager : MonoBehaviour
     }
 
     private ManagerState state = ManagerState.Patrol;
-    [SerializeField] private Collider tendingCollider;
+    private int patrolIdx;
+    
     [SerializeField] private Transform player;
     private HelmetHandler helmetHandler;
-    private int patrolIdx;
-    private NavMeshAgent agent;
-    private float viewConeAngle = 30f;
-    private float viewConeRange = 15f;
     
+    private NavMeshAgent agent;
+    private float viewConeAngle = 35f;
+    private float viewConeRange = 20f;
+    
+    private bool findingChild;
+    private float childCareTime = 5f;
+    private float timeTended;
 
 
     public void Start()
@@ -45,33 +47,22 @@ public class AlienManager : MonoBehaviour
         switch (state)
         {
             case ManagerState.Patrol:
-                float dist = agent.remainingDistance;
-                if (dist != Mathf.Infinity 
-                    && agent.pathStatus == NavMeshPathStatus.PathComplete 
-                    && agent.remainingDistance == 0)
-                {
-                    SetNewPatrolPoint();
-                }
+                CheckRemainingDistance();
                 break;
             // wait certain time and resume patrol
             case ManagerState.Tending:
+                TendChildren();
                 break;
             case ManagerState.Chase:
-                agent.destination = player.position;
-                float distToPlayer = agent.remainingDistance;
-                if (distToPlayer != Mathf.Infinity 
-                    && agent.pathStatus == NavMeshPathStatus.PathComplete 
-                    && agent.remainingDistance == 0)
-                {
-                    HandleStateChange(ManagerState.Abduct);
-                }
+                Chase();
                 break;
             case ManagerState.Abduct:
+                Abduct();
                 break;
         }
     }
     
-    private void HandleStateChange(ManagerState newState)
+    public void HandleStateChange(ManagerState newState)
     {
         state = newState;
         switch (newState)
@@ -81,38 +72,95 @@ public class AlienManager : MonoBehaviour
                 Debug.Log("changing state to patrol");
                 break;
             case ManagerState.Tending:
+                findingChild = false;
                 Debug.Log("changing state to tending");
                 break;
             case ManagerState.Chase:
+                findingChild = false;
                 agent.SetDestination(player.position);
                 Debug.Log("changing state to chase");
                 break;
             case ManagerState.Abduct:
                 agent.isStopped = true;
+                agent.ResetPath();
                 Debug.Log("changing state to abduct");
                 break;
         }
     }
-    
-    // ignore patrol, go to nearest child and calm them down
-    public IEnumerator HandleChildren()
+
+    #region State Behavior
+    private void CheckRemainingDistance()
     {
-        state = ManagerState.Tending;
-        tendingCollider.enabled = true;
-        yield return new WaitForSeconds(childCareTime);
-        tendingCollider.enabled = false;
+        float dist = agent.remainingDistance;
+        if (dist != Mathf.Infinity 
+            && agent.pathStatus == NavMeshPathStatus.PathComplete)
+        {
+            if (findingChild)
+            {
+                findingChild = false;
+                HandleStateChange(ManagerState.Tending);
+            }
+
+            else
+            {
+                SetNewPatrolPoint();
+            }
+        }
+    }
+
+    private void TendChildren()
+    {
+        timeTended += Time.deltaTime;
+        if (timeTended >= childCareTime)
+        {
+            timeTended = 0f;
+            HandleChildren();
+        }
+    }
+
+    private void Chase()
+    {
+        agent.destination = player.position;
+        float distToPlayer = agent.remainingDistance;
+        if (distToPlayer != Mathf.Infinity 
+            && agent.pathStatus == NavMeshPathStatus.PathComplete 
+            && agent.remainingDistance == 0)
+        {
+            HandleStateChange(ManagerState.Abduct);
+        }
+    }
+
+    private void Abduct()
+    {
+        
+    }
+    
+    #endregion
+    public void AlertCry(Vector3 pos)
+    {
+        Debug.Log("baby alert");
+        agent.SetDestination(pos);
+        findingChild = true;
+    }
+    
+    #region Helper Functions
+    private void HandleChildren()
+    {
+        foreach (var child in children)
+        {
+            child.Tend();
+        }
         HandleStateChange(ManagerState.Patrol);
     }
 
     private void SetNewPatrolPoint()
     {
         int oldPatrolIdx = patrolIdx;
-        while (patrolIdx ==  oldPatrolIdx)
+        while (patrolIdx == oldPatrolIdx)
         {
             patrolIdx = Random.Range(0, patrolPoints.Count);
         }
         agent.SetDestination(patrolPoints[patrolIdx].position);
-        Debug.Log($"Set new dest to {patrolPoints[patrolIdx].position}");
     }
     private void CheckPlayerMask()
     {
@@ -122,22 +170,31 @@ public class AlienManager : MonoBehaviour
 
         float angleToPlayer = Vector3.Angle(transform.forward, directionToPlayer);
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-
-        // bascically just doing math to do damage instead of damage colliders
-        // similar to hitscan i guess, where if they are within the range they take damage instead of lining up with cone that instatiates for instance
-
-        if(angleToPlayer <= viewConeAngle / 2f 
-           && distanceToPlayer <= viewConeRange
-           && !helmetHandler.GetIsHelmetOn())
+        
+        // player is in view
+        if(angleToPlayer <= viewConeAngle / 2f && distanceToPlayer <= viewConeRange)
         {
-            HandleStateChange(ManagerState.Chase);
+            // mask not on
+            if (!helmetHandler.GetIsHelmetOn())
+            {
+                HandleStateChange(ManagerState.Chase);
+            }
+
+            // child abuse
+            foreach (var child in children)
+            {
+                if (child.abused)
+                {
+                    HandleStateChange(ManagerState.Chase);
+                }
+            }
         }
     }
     
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, viewConeAngle); //flamethrowerRange
+        Gizmos.DrawWireSphere(transform.position, viewConeAngle);
 
         //cone below
         Vector3 leftBoudnry = Quaternion.Euler(0, -viewConeAngle / 2f, 0) * transform.forward * viewConeRange;
@@ -147,4 +204,5 @@ public class AlienManager : MonoBehaviour
         Gizmos.DrawLine(transform.position, transform.position + leftBoudnry);
         Gizmos.DrawLine(transform.position, transform.position + rightBoudnry);
     }
+    #endregion
 }
