@@ -988,8 +988,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1261628528}
         m_TargetAssemblyTypeName: SamplePuzzle, Assembly-CSharp
-        m_MethodName: SaySomething
-        m_Mode: 5
+        m_MethodName: CutWire
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1404,8 +1404,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2023359590}
         m_TargetAssemblyTypeName: SamplePuzzle, Assembly-CSharp
-        m_MethodName: SaySomething
-        m_Mode: 5
+        m_MethodName: CutWire
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1536,8 +1536,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 479878876}
         m_TargetAssemblyTypeName: SamplePuzzle, Assembly-CSharp
-        m_MethodName: SaySomething
-        m_Mode: 5
+        m_MethodName: CutWire
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1818,15 +1818,15 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 479878876}
         m_TargetAssemblyTypeName: SamplePuzzle, Assembly-CSharp
-        m_MethodName: SaySomething
-        m_Mode: 5
+        m_MethodName: CutWire
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Yippee
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &1045922525
 MonoBehaviour:
@@ -3246,15 +3246,15 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2023359590}
         m_TargetAssemblyTypeName: SamplePuzzle, Assembly-CSharp
-        m_MethodName: SaySomething
-        m_Mode: 5
+        m_MethodName: CutWire
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Yippee
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &1570252756
 MonoBehaviour:
@@ -4255,15 +4255,15 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1261628528}
         m_TargetAssemblyTypeName: SamplePuzzle, Assembly-CSharp
-        m_MethodName: SaySomething
-        m_Mode: 5
+        m_MethodName: CutWire
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Yippee
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &2048245888
 MonoBehaviour:
