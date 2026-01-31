@@ -10,10 +10,11 @@ public class TaskManager : MonoBehaviour
 
     [Header("Task Info")]
     [SerializeField] Tasks[] listOfTasks;
+    [SerializeField] public bool taskHasBeenFailed;
 
     [Header("Timer")]
-    [SerializeField] private int displayedTime;
-    private int displayedTimeToShow = 0; //this is stupid wahtever
+    [SerializeField] private int displayedTime = 0;
+    [SerializeField] private int displayedTimeToShow = 0; //this is stupid wahtever
     [SerializeField] private bool timerStarted;
     [SerializeField] private float timeAnHourTakes;
     [SerializeField] private bool timerIsOn;
@@ -45,6 +46,10 @@ public class TaskManager : MonoBehaviour
         }
 
         displayedTime += 1;
+
+
+        string startingTimeToShow = "9";
+        displayTimeText.text = startingTimeToShow + ":00 A.M";
 
         UpdateTaskUI(); //to start the task stuff
     }
@@ -83,8 +88,39 @@ public class TaskManager : MonoBehaviour
                 timerIsOn = true;
             }
         }
+
+        if(taskHasBeenFailed)
+        {
+            // run alert task failed on manager
+        }
     }
 
+    private void CheckTaskCompletion()
+    {
+        if (!listOfTasks[0].taskCompleted && displayedTime == 2)
+        {
+            taskHasBeenFailed = true;
+            listOfTasks[0].taskCompleted = true;
+        }
+        else if (!listOfTasks[1].taskCompleted && displayedTime == 4)
+        {
+            taskHasBeenFailed = true;
+            listOfTasks[1].taskCompleted = true;
+        }
+        else if (!listOfTasks[2].taskCompleted && displayedTime == 6)
+        {
+            taskHasBeenFailed = true;
+            listOfTasks[2].taskCompleted = true;
+        }
+        else if (!listOfTasks[3].taskCompleted && displayedTime == 8)
+        {
+            taskHasBeenFailed = true;
+            listOfTasks[3].taskCompleted = true;
+        }
+       
+        UpdateTaskUI();
+        
+    }
     public void UpdateTaskUI()
     {
         for (int i = 0; i < listOfTasks.Length; i++)
@@ -118,7 +154,7 @@ public class TaskManager : MonoBehaviour
 
             string timeOfDay;
 
-            if (displayedTime < 12)
+            if (displayedTime+8 < 12)
             {
                 timeOfDay = "A.M";
             }
@@ -127,12 +163,14 @@ public class TaskManager : MonoBehaviour
                 timeOfDay = "P.M";
             }
 
-            displayedTimeToShow = displayedTime % 12;
+            displayedTimeToShow = (displayedTime+ 8)  % 12;
             if (displayedTimeToShow == 0)
             {
                 displayedTimeToShow = 12;
             }
             displayTimeText.text = displayedTimeToShow.ToString() + ":00 " + timeOfDay;
+
+            CheckTaskCompletion();
 
             Debug.Log(displayedTime);
             Debug.Log(displayedTimeToShow);
