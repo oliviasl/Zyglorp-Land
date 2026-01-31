@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TriviaQuestion
   question: 2. What is the recommended quota for child abuse?
   answers:
-  - A. 20
-  - B. 25
-  - C. 10
-  - D. 15
+  - A. 20 children
+  - B. 25 children
+  - C. 10 children
+  - D. 15 children

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52626ed978404e446a45cef59a290896, type: 3}
   m_Name: Question3
   m_EditorClassIdentifier: Assembly-CSharp::TriviaQuestion
-  question: "3. What is Zyglorp\u2019s dog\u2019s name."
+  question: "3. What is the name of Zyglorp\u2019s dog."
   answers:
   - A. Gleepglorp
   - 'B.            '
