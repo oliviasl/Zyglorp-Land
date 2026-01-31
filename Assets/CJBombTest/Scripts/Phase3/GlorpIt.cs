@@ -54,6 +54,8 @@ public class GlorpIt : Puzzle
 
     IEnumerator ClipWait()
     {
+        takingAnswers = true;
+        correct = false;
         //TEMP MEASURE UNTIL WE GET SOUND CLIPS:
         tempIndicator.text = tempGlorps[answers[currentClip]];
         Debug.Log("Answer Now");
@@ -66,9 +68,7 @@ public class GlorpIt : Puzzle
         {
             yield return null;
         }
-        
-        takingAnswers = true;
-        correct = false;
+       
         yield return new WaitForSeconds(waitTime);
         takingAnswers = false;
         CheckGlorp();
