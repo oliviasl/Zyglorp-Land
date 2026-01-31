@@ -119,6 +119,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &245488604 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2934974725688510063, guid: 979ebff43452a864fa08d6445d72c3a1, type: 3}
+  m_PrefabInstance: {fileID: 8192726322445311848}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b27d3e3e0f01bec44ba47bf85169525f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BombManager
 --- !u!1 &249438555
 GameObject:
   m_ObjectHideFlags: 0
@@ -474,6 +485,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BombHolder
       objectReference: {fileID: 0}
+    - target: {fileID: 6298002505003432182, guid: 979ebff43452a864fa08d6445d72c3a1, type: 3}
+      propertyPath: bm
+      value: 
+      objectReference: {fileID: 245488604}
     - target: {fileID: 6378229781750264150, guid: 979ebff43452a864fa08d6445d72c3a1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

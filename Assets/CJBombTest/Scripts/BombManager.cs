@@ -2,9 +2,23 @@ using UnityEngine;
 
 public class BombManager : MonoBehaviour
 {
+    public static BombManager instance { get; private set; }
+
     [SerializeField] Phase[] phases; // the array holding all the puzzles of each phase
     [SerializeField] int currentPhase = 0;
     [SerializeField] BombRotate rotator;
+
+    void Awake()
+    {
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

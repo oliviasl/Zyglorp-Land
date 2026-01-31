@@ -856,10 +856,18 @@ PrefabInstance:
       propertyPath: bm
       value: 
       objectReference: {fileID: 2934974725688510063}
+    - target: {fileID: 2819095893497777014, guid: 2cdd48f4d80c6184c912fcdfb1e00621, type: 3}
+      propertyPath: youSuck
+      value: 
+      objectReference: {fileID: 7720963978904946774}
     - target: {fileID: 3389390026195390583, guid: 2cdd48f4d80c6184c912fcdfb1e00621, type: 3}
       propertyPath: bm
       value: 
       objectReference: {fileID: 2934974725688510063}
+    - target: {fileID: 3389390026195390583, guid: 2cdd48f4d80c6184c912fcdfb1e00621, type: 3}
+      propertyPath: youSuck
+      value: 
+      objectReference: {fileID: 7720963978904946774}
     - target: {fileID: 5658886421679798278, guid: 2cdd48f4d80c6184c912fcdfb1e00621, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
