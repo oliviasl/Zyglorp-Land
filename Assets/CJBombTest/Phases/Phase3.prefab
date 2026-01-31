@@ -864,7 +864,7 @@ MonoBehaviour:
   - {fileID: 371657053044411915}
   - {fileID: 328167505187254265}
   puzzles:
-  - {fileID: 0}
+  - {fileID: 7352703733221439356}
 --- !u!1 &7963354453661300465
 GameObject:
   m_ObjectHideFlags: 0
