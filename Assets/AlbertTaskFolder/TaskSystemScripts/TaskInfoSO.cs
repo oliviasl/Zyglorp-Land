@@ -5,6 +5,7 @@ public class TaskInfoSO : ScriptableObject
 {
     [SerializeField] private string taskNameText;
     [SerializeField] private int timeWhenTaskIsDue;
+    [SerializeField] private int timeToShowForTask;
 
     [TextArea(3, 10)]
     [SerializeField] private string taskInfoText;
