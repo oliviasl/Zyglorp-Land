@@ -12,11 +12,9 @@ public class TaskManager : MonoBehaviour
     [SerializeField] Tasks[] listOfTasks;
 
     [Header("Timer")]
-   // [SerializeField] float actualElaspedTime;
     [SerializeField] private int displayedTime;
     private int displayedTimeToShow = 0; //this is stupid wahtever
     [SerializeField] private bool timerStarted;
-    [SerializeField] private bool isUsingAM;
     [SerializeField] private float timeAnHourTakes;
     [SerializeField] private bool timerIsOn;
 
@@ -62,9 +60,9 @@ public class TaskManager : MonoBehaviour
 
     private void Update()
     {
-        if(taskAction.action.WasPressedThisFrame())
+        if (taskAction.action.WasPressedThisFrame())
         {
-            if(!taskListIsVisible)
+            if (!taskListIsVisible)
             {
                 completeTaskUICanvas.SetActive(true);
                 taskListIsVisible = true;
@@ -74,18 +72,16 @@ public class TaskManager : MonoBehaviour
                 completeTaskUICanvas.SetActive(false);
                 taskListIsVisible = false;
             }
-           
+
         }
 
         if (timerStarted)
         {
-            if(!timerIsOn)
+            if (!timerIsOn)
             {
                 StartCoroutine(WaitToIncreaseTime());
                 timerIsOn = true;
             }
-           
-
         }
     }
 
@@ -93,7 +89,7 @@ public class TaskManager : MonoBehaviour
     {
         for (int i = 0; i < listOfTasks.Length; i++)
         {
-            if(listOfTasks[i] != null)
+            if (listOfTasks[i] != null)
             {
                 if (listOfTasks[i].taskCompleted)
                 {
@@ -107,77 +103,22 @@ public class TaskManager : MonoBehaviour
 
                 }
             }
-            
-        }
 
-        
-    }
-
-    private void TimerHandler()
-    {
-        if(displayedTime == 9)
-        {
-            isUsingAM = true;
-            displayedTimeToShow = 9;
         }
-        else if (displayedTime == 10)
-        {
-            isUsingAM = true;
-            displayedTimeToShow = 10;
-        }
-        else if (displayedTime == 11)
-        {
-            isUsingAM = true;
-            displayedTimeToShow = 11;
-        }
-        else if (displayedTime == 12)
-        {
-            
-            displayedTimeToShow = 12;
-        }
-        else if (displayedTime == 13)
-        {
-            
-            displayedTimeToShow = 1;
-        }
-        else if (displayedTime == 14)
-        {
-            
-            displayedTimeToShow = 2;
-        }
-        else if (displayedTime == 15)
-        {
-
-            displayedTimeToShow = 3;
-        }
-        else if (displayedTime == 16)
-        {
-
-            displayedTimeToShow = 4;
-        }
-        else if (displayedTime == 17)
-        {
-
-            displayedTimeToShow = 5;
-        }
-
 
 
     }
 
     IEnumerator WaitToIncreaseTime()
     {
-        
-        while(displayedTime < 17)
+        while (displayedTime <= 17)
         {
             yield return new WaitForSeconds(timeAnHourTakes);
             displayedTime += 1;
 
-            TimerHandler();
-
             string timeOfDay;
 
-            if (isUsingAM)
+            if (displayedTime < 12)
             {
                 timeOfDay = "A.M";
             }
@@ -186,18 +127,15 @@ public class TaskManager : MonoBehaviour
                 timeOfDay = "P.M";
             }
 
+            displayedTimeToShow = displayedTime % 12;
+            if (displayedTimeToShow == 0)
+            {
+                displayedTimeToShow = 12;
+            }
             displayTimeText.text = displayedTimeToShow.ToString() + ":00 " + timeOfDay;
 
             Debug.Log(displayedTime);
             Debug.Log(displayedTimeToShow);
         }
-
-        
-        
-    }
-    public void StartTimer()
-    {
-        // where we start the timer after the game officialyl starts
-        timerStarted = true;
     }
 }
