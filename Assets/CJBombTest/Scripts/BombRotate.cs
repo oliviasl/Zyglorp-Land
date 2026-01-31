@@ -4,13 +4,14 @@ using System.Collections;
 public class BombRotate : MonoBehaviour
 {
     [SerializeField] GameObject bomb;
-    [SerializeField] float rotationTime;
-    [SerializeField] GameObject[] faces;
+    [SerializeField] float rotationTime; //how long a rotation takes
+    [SerializeField] GameObject[] faces; //set of currently active faces
     [SerializeField] int currentFace = 0;
     private bool isRotating = false;
 
     void Start()
     {
+        currentFace = 0;
         bomb = this.gameObject;
         foreach(GameObject face in faces)
         {
@@ -19,6 +20,7 @@ public class BombRotate : MonoBehaviour
         faces[0].SetActive(true);
     }
 
+    //rotate the bomb left or right. Check the boolean to make it rotate left
     public void RotateBomb(bool left)
     {
         if (!isRotating)
@@ -79,6 +81,21 @@ public class BombRotate : MonoBehaviour
         }
 
         isRotating = false;
+        faces[currentFace].SetActive(true);
+    }
+
+    //update all the faces. This is called by BombManager when a phase progresses
+    public void UpdateFaces(GameObject[] newFaces)
+    {
+        for(int i = 0; i < faces.Length; i++)
+        {
+            faces[i] = newFaces[i];
+        }
+
+        foreach (GameObject face in faces)
+        {
+            face.SetActive(false);
+        }
         faces[currentFace].SetActive(true);
     }
 }
