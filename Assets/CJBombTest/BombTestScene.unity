@@ -119,17 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &245488604 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2934974725688510063, guid: 979ebff43452a864fa08d6445d72c3a1, type: 3}
-  m_PrefabInstance: {fileID: 8192726322445311848}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b27d3e3e0f01bec44ba47bf85169525f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BombManager
 --- !u!1 &249438555
 GameObject:
   m_ObjectHideFlags: 0
@@ -394,25 +383,6 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
---- !u!1 &1437366312 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1268362727827891045, guid: 979ebff43452a864fa08d6445d72c3a1, type: 3}
-  m_PrefabInstance: {fileID: 8192726322445311848}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1437366316
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1437366312}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04c255582fd594fa3a1730e85999cf57, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HourglassPuzzle
-  bm: {fileID: 0}
-  toDisable: []
 --- !u!1 &1521768596
 GameObject:
   m_ObjectHideFlags: 0
@@ -504,22 +474,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: BombHolder
       objectReference: {fileID: 0}
-    - target: {fileID: 3308260110971774521, guid: 979ebff43452a864fa08d6445d72c3a1, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1437366316}
-    - target: {fileID: 3308260110971774521, guid: 979ebff43452a864fa08d6445d72c3a1, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Flip
-      objectReference: {fileID: 0}
-    - target: {fileID: 3949997597521507150, guid: 979ebff43452a864fa08d6445d72c3a1, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6298002505003432182, guid: 979ebff43452a864fa08d6445d72c3a1, type: 3}
-      propertyPath: bm
-      value: 
-      objectReference: {fileID: 245488604}
     - target: {fileID: 6378229781750264150, guid: 979ebff43452a864fa08d6445d72c3a1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -563,10 +517,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1268362727827891045, guid: 979ebff43452a864fa08d6445d72c3a1, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1437366316}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 979ebff43452a864fa08d6445d72c3a1, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
