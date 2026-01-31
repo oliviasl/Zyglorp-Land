@@ -5,21 +5,30 @@ namespace Manager
 {
     public class InteractHandler : MonoBehaviour
     {
-        private PlayerInput _playerInput;
+        [SerializeField] private AlienManager manager;
+        private PlayerInput playerInput;
+        private float minimumProximity = 10f;
         private void Awake()
         {
-            _playerInput = GetComponent<PlayerInput>();
+            playerInput = GetComponent<PlayerInput>();
 
-            if (_playerInput != null)
+            if (playerInput != null)
             {
-                InputAction interactAction = _playerInput.actions.FindAction("Interact");
+                InputAction interactAction = playerInput.actions.FindAction("Interact");
                 interactAction.performed += Interact;
             }
         }
 
         public void Interact(InputAction.CallbackContext obj)
         {
-            
+            foreach (var child in manager.children)
+            {
+                float dist = Vector3.Distance(transform.position, child.transform.position);
+                if (dist <= minimumProximity && child.state != Child.ChildState.Abused)
+                {
+                    child.Abuse();
+                }
+            }
         }
     }
 }

@@ -7,8 +7,8 @@ public class PlayerInteraction : MonoBehaviour
     private IInteractable currentInteractable = null;
     [SerializeField] private InputActionReference interactAction; 
 
-    [Header("Interact UI")]
-    [SerializeField] private GameObject interactUIObjext; //if we are doing an interact UI
+    //[Header("Interact UI")]
+    //[SerializeField] private GameObject interactUIObjext; //if we are doing an interact UI
 
     private void OnEnable()
     {
@@ -25,7 +25,7 @@ public class PlayerInteraction : MonoBehaviour
         if (currentInteractable != null && interactAction.action.WasPressedThisFrame())
         {
             currentInteractable.Interact();
-            interactUIObjext.SetActive(false);
+           // interactUIObjext.SetActive(false);
         }
     }
 
@@ -37,7 +37,7 @@ public class PlayerInteraction : MonoBehaviour
         {
             currentInteractable = interactable;
             Debug.Log("Near interactable object:" + other.name);
-            interactUIObjext.SetActive(true);
+            //interactUIObjext.SetActive(true);
         }
     }
 
@@ -49,7 +49,7 @@ public class PlayerInteraction : MonoBehaviour
         {
             currentInteractable = null;
             Debug.Log("Left interactable object");
-            interactUIObjext.SetActive(false);
+            //interactUIObjext.SetActive(false);
         }
     }
 }

@@ -7,5 +7,9 @@ public class TaskZone : MonoBehaviour, IInteractable
     public void Interact()
     {
         taskToComplete.taskCompleted = true;
+        TaskManager.instance.UpdateTaskUI();
+        Debug.Log("Task Completed");
     }
+
+    
 }

@@ -155,6 +155,4 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  targetPoint: {x: 0, y: 0, z: 0}
-  proximityRadius: 20
-  childCareTime: 5
+  player: {fileID: 0}

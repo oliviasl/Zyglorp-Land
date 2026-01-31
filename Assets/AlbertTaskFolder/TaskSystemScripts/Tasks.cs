@@ -21,6 +21,8 @@ public class Tasks : MonoBehaviour
             {
                 playerAnim.SetTrigger(animationToPlay); //set the trigger for the animation to play
             }
+
+
            
         }
     }
