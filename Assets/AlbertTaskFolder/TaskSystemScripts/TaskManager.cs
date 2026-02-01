@@ -1,5 +1,6 @@
 using System.Collections;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -26,6 +27,12 @@ public class TaskManager : MonoBehaviour
     [Header("Task Input")]
     [SerializeField] private InputActionReference taskAction;
     [SerializeField] private bool taskListIsVisible;
+
+    [Header("Task GameObjects")]
+    [SerializeField] private GameObject task1Object;
+    [SerializeField] private GameObject task2Object;
+    [SerializeField] private GameObject task3Object;
+    [SerializeField] private GameObject task4Object;
 
     [Header("Task UI Info")]
     [SerializeField] GameObject completeTaskUICanvas;
@@ -120,6 +127,23 @@ public class TaskManager : MonoBehaviour
        
         UpdateTaskUI();
         
+        
+    }
+
+    private void UpdateTaskObjects()
+    {
+        if(displayedTime > 3 || listOfTasks[0].taskCompleted)
+        {
+            task2Object.SetActive(true);
+        }
+        if (displayedTime > 5 || listOfTasks[1].taskCompleted)
+        {
+            task3Object.SetActive(true);
+        }
+        if (displayedTime > 7 || listOfTasks[2].taskCompleted)
+        {
+            task4Object.SetActive(true);
+        }
     }
     public void UpdateTaskUI()
     {
@@ -141,6 +165,8 @@ public class TaskManager : MonoBehaviour
             }
 
         }
+
+        UpdateTaskObjects();
 
 
     }

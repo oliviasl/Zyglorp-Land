@@ -4,9 +4,15 @@ using UnityEngine;
 public class TaskZone : MonoBehaviour, IInteractable
 {
     [SerializeField] private Tasks taskToComplete;
-   // [SerializeField] public Material ogMat;
-   // [SerializeField] public Material outlineMat;
+    // [SerializeField] public Material ogMat;
+    // [SerializeField] public Material outlineMat;
+    [SerializeField] private Renderer rend;
 
+
+    private void Start()
+    {
+        rend = GetComponent<Renderer>();
+    }
     public void Interact()
     {
         if(taskToComplete != null)
@@ -14,6 +20,7 @@ public class TaskZone : MonoBehaviour, IInteractable
             taskToComplete.taskCompleted = true;
             TaskManager.instance.UpdateTaskUI();
             Debug.Log("Task Completed");
+            rend.enabled = false;
             
         }
         

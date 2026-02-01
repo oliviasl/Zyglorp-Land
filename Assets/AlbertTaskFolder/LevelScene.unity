@@ -921,6 +921,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TaskZone
   taskToComplete: {fileID: 949260862}
+  rend: {fileID: 0}
 --- !u!65 &468368188
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1240,6 +1241,22 @@ PrefabInstance:
       propertyPath: taskAction
       value: 
       objectReference: {fileID: 337021685}
+    - target: {fileID: 2682615933181255878, guid: c0a4db5edf1a1734aa3185a4426ee054, type: 3}
+      propertyPath: task1Object
+      value: 
+      objectReference: {fileID: 468368186}
+    - target: {fileID: 2682615933181255878, guid: c0a4db5edf1a1734aa3185a4426ee054, type: 3}
+      propertyPath: task2Object
+      value: 
+      objectReference: {fileID: 1941964481}
+    - target: {fileID: 2682615933181255878, guid: c0a4db5edf1a1734aa3185a4426ee054, type: 3}
+      propertyPath: task3Object
+      value: 
+      objectReference: {fileID: 1526702869}
+    - target: {fileID: 2682615933181255878, guid: c0a4db5edf1a1734aa3185a4426ee054, type: 3}
+      propertyPath: task4Object
+      value: 
+      objectReference: {fileID: 2101180390}
     - target: {fileID: 2682615933181255878, guid: c0a4db5edf1a1734aa3185a4426ee054, type: 3}
       propertyPath: displayTimeText
       value: 
@@ -2744,7 +2761,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1526702870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2758,6 +2775,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TaskZone
   taskToComplete: {fileID: 259610841}
+  rend: {fileID: 0}
 --- !u!65 &1526702871
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3528,7 +3546,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1941964482
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3542,6 +3560,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TaskZone
   taskToComplete: {fileID: 296476682}
+  rend: {fileID: 0}
 --- !u!65 &1941964483
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3990,7 +4009,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2101180391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4004,6 +4023,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TaskZone
   taskToComplete: {fileID: 1036047154}
+  rend: {fileID: 0}
 --- !u!65 &2101180392
 BoxCollider:
   m_ObjectHideFlags: 0
