@@ -21,7 +21,7 @@ public class AlienManager : MonoBehaviour
     }
 
     [SerializeField] private Transform saucer;
-    [SerializeField] private Vector3 spawnPoint;
+    [SerializeField] private Transform spawnPoint;
     [SerializeField] private Canvas fadeScreen;
     private FirstPersonController controller;
     
@@ -228,7 +228,7 @@ public class AlienManager : MonoBehaviour
         saucer.transform.position = new Vector3(100f, 100f, 100f);
         controller.EnableMovement(false);
         abductTimeElapsed = 0f;
-        player.transform.position = spawnPoint;
+        player.transform.position = spawnPoint.transform.position;
         fadeScreen.enabled = false;
         helmetHandler.abduction = false;
         helmetHandler.ShowMaskScreen();
