@@ -139,6 +139,11 @@ public class TaskManager : MonoBehaviour
         
     }
 
+    public void StartTimer()
+    {
+        timerStarted = true;
+    }
+
     private void BombExplodes()
     {
         if(explosionSFX != null)

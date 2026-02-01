@@ -7,8 +7,9 @@ public class TaskZone : MonoBehaviour, IInteractable
     // [SerializeField] public Material ogMat;
     // [SerializeField] public Material outlineMat;
     [SerializeField] private Renderer rend;
-    [SerializeField] private Animator playerAnim;
+    //[SerializeField] private Animator playerAnim;
     [SerializeField] private string triggerForInteract;
+   // [SerializeField] private Camera taskCam;
 
 
     private void Start()
@@ -24,11 +25,17 @@ public class TaskZone : MonoBehaviour, IInteractable
             TaskManager.instance.UpdateTaskUI();
             Debug.Log("Task Completed");
             rend.enabled = false;
-            playerAnim.SetTrigger(triggerForInteract);
+           // playerAnim.SetTrigger(triggerForInteract);
+           // taskCam.gameObject.SetActive(true);
             
         }
         
     }
+
+   // public void DisableTaskCam()
+    //{
+    //    taskCam.gameObject.SetActive(false);
+   // }
 
     
 }
