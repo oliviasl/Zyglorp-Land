@@ -8,8 +8,6 @@ namespace Manager
     {
         [Header("Animation")]
         [SerializeField] private Animator kidAnim;
-
-        public List<Transform> patrolPoints; 
         public enum ChildState
         {
             Patrol,
@@ -44,8 +42,6 @@ namespace Manager
             agent = GetComponent<NavMeshAgent>();
             player = FindFirstObjectByType<CharacterController>().GetComponent<Transform>();
             helmetHandler = player.GetComponent<HelmetHandler>();
-            // patrolIdx = Random.Range(0, patrolPoints.Count);
-            // agent.SetDestination(patrolPoints[patrolIdx].position);
             Patroling();
             
             if(AlienManager.Instance == null) Debug.LogError("AlienManager is null");
@@ -58,7 +54,6 @@ namespace Manager
             switch (state)
             {
                 case ChildState.Patrol:
-                    //CheckDistance();
                     Patroling();
                     break;
                 case ChildState.Abused:
@@ -133,17 +128,6 @@ namespace Manager
             }
         }
 
-        private void CheckDistance()
-        {
-            float dist = agent.remainingDistance;
-            if (dist != Mathf.Infinity 
-                && agent.pathStatus == NavMeshPathStatus.PathComplete 
-                && agent.remainingDistance <= minimumProximity)
-            {
-                SetNewPatrolPoint();
-            }
-        }
-
         private void Recover()
         {
             timeElapsed  += Time.deltaTime;
@@ -168,16 +152,6 @@ namespace Manager
         {
             HandleStateChange(ChildState.Patrol);
             kidAnim.SetTrigger("KidCalmed");
-        }
-        
-        private void SetNewPatrolPoint()
-        {
-            int oldPatrolIdx = patrolIdx;
-            while (patrolIdx == oldPatrolIdx)
-            {
-                patrolIdx = Random.Range(0, patrolPoints.Count);
-            }
-            agent.SetDestination(patrolPoints[patrolIdx].position);
         }
         private void CheckPlayerMask()
         {
