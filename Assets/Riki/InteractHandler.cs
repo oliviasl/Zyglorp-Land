@@ -6,7 +6,7 @@ namespace Manager
     public class InteractHandler : MonoBehaviour
     {
         [SerializeField] private Animator playerAnim;
-        [SerializeField] private Animator kidAnim;
+       
         [SerializeField] string[] triggersForShoveAnimations;
 
 
@@ -43,14 +43,16 @@ namespace Manager
             if (victim != null)
             {
                 victim.Abuse();
-                if(victim.GetComponent<Animator>() != null)
-                {
-                    kidAnim = victim.GetComponent<Animator>();
-                    int randomIndex = Random.Range(0, triggersForShoveAnimations.Length);
-                    playerAnim.SetTrigger(triggersForShoveAnimations[randomIndex]);
-                    kidAnim.SetTrigger(triggersForShoveAnimations[randomIndex]);
-                }
-                
+                //if(victim.GetComponent<Animator>() != null)
+                //{
+                //kidAnim = victim.GetComponent<Animator>();
+                //   int randomIndex = Random.Range(0, triggersForShoveAnimations.Length);
+                //   playerAnim.SetTrigger(triggersForShoveAnimations[randomIndex]);
+                //kidAnim.SetTrigger(triggersForShoveAnimations[randomIndex]);
+                // }
+
+                int randomIndex = Random.Range(0, triggersForShoveAnimations.Length);
+                playerAnim.SetTrigger(triggersForShoveAnimations[randomIndex]);
             }
         }
         
