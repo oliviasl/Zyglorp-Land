@@ -19,7 +19,7 @@ public class AlienManager : MonoBehaviour
         Abduct
     }
 
-    private ManagerState state = ManagerState.Patrol;
+    public ManagerState state = ManagerState.Patrol;
     
     [SerializeField] private Transform saucer;
     [SerializeField] private Transform spawnPoint;
