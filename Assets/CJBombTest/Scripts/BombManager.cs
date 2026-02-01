@@ -60,7 +60,7 @@ public class BombManager : MonoBehaviour
         {
             bombAnimator.SetInteger("stage", currentPhase);
             // animator is handling this now...
-            UpdateAllFaces();
+            // UpdateAllFaces();
         }
 
     }
