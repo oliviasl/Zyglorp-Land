@@ -42,7 +42,8 @@ namespace Manager
             agent = GetComponent<NavMeshAgent>();
             player = FindFirstObjectByType<CharacterController>().GetComponent<Transform>();
             helmetHandler = player.GetComponent<HelmetHandler>();
-            Patroling();
+            // Patrolling();
+            SearchForPatrolPoint();
             
             if(AlienManager.Instance == null) Debug.LogError("AlienManager is null");
             AlienManager.Instance.children.Add(this);
@@ -54,7 +55,7 @@ namespace Manager
             switch (state)
             {
                 case ChildState.Patrol:
-                    Patroling();
+                    Patrolling();
                     break;
                 case ChildState.Abused:
                     Recover();
@@ -71,11 +72,13 @@ namespace Manager
             {
                 case ChildState.Patrol:
                     abused = false;
-                    Patroling();
+                    // Patrolling();
+                    SearchForPatrolPoint();
                     break;
                 case ChildState.Abused:
                     abused = true;
                     agent.ResetPath();
+                    walkPoint = transform.position;
                     AlienManager.Instance.AlertAbuse();
                     break;
                 case ChildState.Cry:
@@ -105,7 +108,7 @@ namespace Manager
             }
         }
 
-        public void Patroling()
+        public void Patrolling()
         {
             if (!walkPointSet)
             {

@@ -6,7 +6,7 @@ namespace Manager
     public class InteractHandler : MonoBehaviour
     {
         [SerializeField] private Animator playerAnim;
-       
+        [SerializeField] private HelmetHandler helmetHandler;
         [SerializeField] string[] triggersForShoveAnimations;
 
 
@@ -21,11 +21,19 @@ namespace Manager
                 InputAction interactAction = playerInput.actions.FindAction("Interact");
                 interactAction.performed += Interact;
             }
+            
+            helmetHandler = GetComponent<HelmetHandler>();
+            
+            if (helmetHandler == null)
+            {
+                Debug.LogError("helmetHandler is null");
+            }
         }
 
         public void Interact(InputAction.CallbackContext obj)
         {
             if (AlienManager.Instance == null) return;
+            if (!helmetHandler.GetIsHelmetOn()) return;
             
             float closestDistance = minimumProximity;
             Child victim = null;
