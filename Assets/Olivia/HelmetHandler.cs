@@ -18,6 +18,7 @@ public class HelmetHandler : MonoBehaviour
     readonly float rotationTime = 0.5f;
     float degrees;
     private bool cameraRotating = false;
+    public bool abduction = false;
 
     [SerializeField] private Animator _bombAnim;
 
@@ -46,7 +47,8 @@ public class HelmetHandler : MonoBehaviour
     private void ToggleHelmetUI(InputAction.CallbackContext obj)
     {
         if (cameraRotating) { return; }
-
+        if(abduction)  { return; }
+        
         _bIsHelmetOn = !_bIsHelmetOn;
 
         // camera stuff
@@ -70,6 +72,24 @@ public class HelmetHandler : MonoBehaviour
             StartCoroutine(RotateToBomb());
             _bombAnim.SetBool("up", true);
         }
+    }
+
+    public void HideMaskScreen()
+    {
+        handler.Hide(helmetUICanvas);
+        _bombAnim.SetBool("up", false);
+        Cursor.lockState = CursorLockMode.None;
+    }
+
+    public void ShowMaskScreen()
+    {
+        controller.EnableMovement(true);
+        controller.EnableLook(true);
+        Cursor.lockState = CursorLockMode.Locked;
+        handler.Show(helmetUICanvas);
+
+        StartCoroutine(RotateBack());
+        _bombAnim.SetBool("up", false);
     }
 
     private IEnumerator RotateToBomb()
