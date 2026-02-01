@@ -1,5 +1,7 @@
+using System.Collections;
 using System.Collections.Generic;
 using Manager;
+using StarterAssets;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -17,6 +19,8 @@ public class AlienManager : MonoBehaviour
         Abduct
     }
 
+    [SerializeField] private Transform saucer;
+    
     private ManagerState state = ManagerState.Patrol;
     private int patrolIdx;
     
@@ -70,9 +74,6 @@ public class AlienManager : MonoBehaviour
             case ManagerState.Chase:
                 Chase();
                 break;
-            case ManagerState.Abduct:
-                Abduct();
-                break;
         }
     }
     
@@ -99,6 +100,7 @@ public class AlienManager : MonoBehaviour
             case ManagerState.Abduct:
                 agent.ResetPath();
                 Debug.Log("changing state to abduct");
+                StartCoroutine(Abduct());
                 break;
         }
     }
@@ -151,9 +153,10 @@ public class AlienManager : MonoBehaviour
         }
     }
 
-    private void Abduct()
+    private IEnumerator Abduct()
     {
-        
+        player.GetComponent<FirstPersonController>();
+        yield return new WaitForSeconds(5f);
     }
     
     #endregion

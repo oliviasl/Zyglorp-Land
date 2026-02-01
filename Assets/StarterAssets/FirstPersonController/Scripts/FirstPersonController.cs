@@ -64,6 +64,8 @@ namespace StarterAssets
 		private float _jumpTimeoutDelta;
 		private float _fallTimeoutDelta;
 
+		[SerializeField] private bool isAbleToMove;
+
 	
 #if ENABLE_INPUT_SYSTEM
 		private PlayerInput _playerInput;
@@ -191,7 +193,14 @@ namespace StarterAssets
 			if (_input.move != Vector2.zero)
 			{
 				// move
-				inputDirection = transform.right * _input.move.x + transform.forward * _input.move.y;
+				if (!isAbleToMove)
+				{
+					inputDirection = Vector2.zero;
+				}
+				else
+				{
+					inputDirection = transform.right * _input.move.x + transform.forward * _input.move.y;
+				}
 			}
 
 			// move the player
@@ -263,6 +272,11 @@ namespace StarterAssets
 
 			// when selected, draw a gizmo in the position of, and matching radius of, the grounded collider
 			Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z), GroundedRadius);
+		}
+
+		public void EnableMovement(bool enable)
+		{
+			isAbleToMove = enable;
 		}
 	}
 }
