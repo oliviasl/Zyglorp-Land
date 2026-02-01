@@ -21,6 +21,7 @@ public class OpeartionPuzzle : Puzzle
 
     public void TouchedEdge()
     {
+        if (!gameActive) { return; }
         Debug.Log("ouch");
         gameActive = false;
         handler.Show(ButtonStart);
