@@ -14,10 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TriviaQuestion
   question: What was my coffee order?
   answers:
-  - A. Small Espresso with Extra Ice, Medium Sugar, Gingerbread Syrup, Whole Milk,
-    and Salted Ice
-  - "B. Melon Refresher with 9 pumps of Cow\u2019s Milk (trademark) and 6 Tapioca
-    Pearls with Lychee"
+  - 
+  - 
   - C. Just Black
-  - D. Small Pumpkin Spice with Ice, Extra Sugar, Gingerbread Syrup, Whole Milk,
-    and Salted Ice
+  - 
