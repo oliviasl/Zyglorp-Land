@@ -220,6 +220,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5748972192055711596}
   - component: {fileID: 5710835394247823542}
+  - component: {fileID: 5832353833483189955}
   m_Layer: 5
   m_Name: Face4
   m_TagString: Untagged
@@ -259,12 +260,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 041fa1822601d4de58d617b2b1d08beb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OpeartionPuzzle
-  bm: {fileID: 0}
   toDisable:
   - {fileID: 6195912872156648981}
   ButtonStart: {fileID: 3909528221338522233}
   ButtonEnd: {fileID: 5245468530124864020}
-  handler: {fileID: 0}
+--- !u!225 &5832353833483189955
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 328167505187254265}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &371657053044411915
 GameObject:
   m_ObjectHideFlags: 0
@@ -274,6 +285,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1061268812958799259}
+  - component: {fileID: 7363274187205763119}
   m_Layer: 5
   m_Name: Face3 (Hourglass)
   m_TagString: Untagged
@@ -303,6 +315,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &7363274187205763119
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 371657053044411915}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &600616757841977335
 GameObject:
   m_ObjectHideFlags: 0
@@ -712,8 +736,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: florp
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b1fdf77e9d93540e3bd1c4b04e97bcc6, type: 2}
+  m_sharedMaterial: {fileID: -8670364408808731638, guid: b1fdf77e9d93540e3bd1c4b04e97bcc6, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1433,8 +1457,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: zorp
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b1fdf77e9d93540e3bd1c4b04e97bcc6, type: 2}
+  m_sharedMaterial: {fileID: -8670364408808731638, guid: b1fdf77e9d93540e3bd1c4b04e97bcc6, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1570,8 +1594,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: glorp
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b1fdf77e9d93540e3bd1c4b04e97bcc6, type: 2}
+  m_sharedMaterial: {fileID: -8670364408808731638, guid: b1fdf77e9d93540e3bd1c4b04e97bcc6, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2830,6 +2854,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5870022204217242808}
+  - component: {fileID: 2121018826198619409}
   m_Layer: 5
   m_Name: Face2 (Glorp It)
   m_TagString: Untagged
@@ -2862,6 +2887,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &2121018826198619409
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5555768188875164753}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &5970110107344405395
 GameObject:
   m_ObjectHideFlags: 0
@@ -2929,8 +2966,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: FLIP
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b1fdf77e9d93540e3bd1c4b04e97bcc6, type: 2}
+  m_sharedMaterial: {fileID: -8670364408808731638, guid: b1fdf77e9d93540e3bd1c4b04e97bcc6, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3346,8 +3383,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: START!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b1fdf77e9d93540e3bd1c4b04e97bcc6, type: 2}
+  m_sharedMaterial: {fileID: -8670364408808731638, guid: b1fdf77e9d93540e3bd1c4b04e97bcc6, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3465,7 +3502,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a850af5e831365b43acdb319828b21b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GlorpIt
-  bm: {fileID: 0}
   toDisable:
   - {fileID: 6514561458336045762}
   - {fileID: 6360725582467765398}
@@ -3831,13 +3867,14 @@ GameObject:
   m_Component:
   - component: {fileID: 8586545991629884385}
   - component: {fileID: 2666602584613120945}
+  - component: {fileID: 8446703431170863297}
   m_Layer: 5
   m_Name: Phase3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8586545991629884385
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3884,6 +3921,18 @@ MonoBehaviour:
   - {fileID: 7352703733221439356}
   - {fileID: 7109956563529432870}
   - {fileID: 5710835394247823542}
+--- !u!225 &8446703431170863297
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7167772596165210031}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &7993888649980527845
 GameObject:
   m_ObjectHideFlags: 0
@@ -3893,6 +3942,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8430228603120098743}
+  - component: {fileID: 2348677150881493540}
   m_Layer: 5
   m_Name: Face1 (Zorp It)
   m_TagString: Untagged
@@ -3921,6 +3971,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &2348677150881493540
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7993888649980527845}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &8180213362679274528
 GameObject:
   m_ObjectHideFlags: 0
@@ -3978,7 +4040,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04c255582fd594fa3a1730e85999cf57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HourglassPuzzle
-  bm: {fileID: 0}
   toDisable:
   - {fileID: 4867628927062799474}
   - {fileID: 3989511507990062015}
