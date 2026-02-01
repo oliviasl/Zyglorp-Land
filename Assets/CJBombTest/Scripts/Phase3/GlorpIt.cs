@@ -35,11 +35,9 @@ public class GlorpIt : Puzzle
         NewClip();
     }
 
+	// called by bomb animaiton manager
     public void Glorp(int ans)
     {
-        /*
-        animators[ans].SetBool("glorping", true);
-        StartCoroutine(AnimationWait(ans));*/
         if(ans == answers[currentClip] && takingAnswers)
         {
             if (!correct)
@@ -54,12 +52,6 @@ public class GlorpIt : Puzzle
         {
             Fail();
         }
-    }
-
-    IEnumerator AnimationWait(int ans)
-    {
-        yield return null;
-        animators[ans].SetBool("glorping", false);
     }
 
     IEnumerator ClipWait()
