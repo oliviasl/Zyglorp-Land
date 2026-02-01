@@ -19,11 +19,13 @@ public class OpeartionPuzzle : Puzzle
         gameActive = true;
         handler.Hide(ButtonStart);
         handler.Show(ButtonEnd);
+        BombManager.instance.GetBAM().ButtonClickSFX();
     }
 
     public void TouchedEdge()
     {
         if (!gameActive) { return; }
+        BombManager.instance.GetBAM().FailureSFX();
         Debug.Log("ouch");
         gameActive = false;
         handler.Show(ButtonStart);
@@ -34,6 +36,7 @@ public class OpeartionPuzzle : Puzzle
     {
         gameActive = false;
         handler.Hide(ButtonEnd);
+        BombManager.instance.GetBAM().ButtonClickSFX();
 
         base.Solve();
     }

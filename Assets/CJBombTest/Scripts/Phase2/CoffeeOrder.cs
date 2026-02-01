@@ -7,6 +7,8 @@ public class CoffeeOrder : Puzzle
     [SerializeField] float ragebaitTimer = 10f;
     [SerializeField] GameObject phone1;
     [SerializeField] GameObject phone2;
+    [SerializeField] GameObject screen1;
+    [SerializeField] GameObject screen2;
     [SerializeField] CoffeeWindow[] windows;
     [SerializeField] TMP_Text[] phone1TextBoxes;
     [SerializeField] TMP_Text[] phone2TextBoxes;
@@ -67,13 +69,13 @@ public class CoffeeOrder : Puzzle
         }
         else
         {
+            BombManager.instance.GetBAM().FailureSFX();
             Reset();
         }
     }
 
     public void Reset()
-    {
-        BombManager.instance.GetBAM().FailureSFX();
+    { 
         playerString = "";
         currentScreen = 0;
         SetScreens();
@@ -83,6 +85,8 @@ public class CoffeeOrder : Puzzle
     {
         phone1.SetActive(phone1Active);
         phone2.SetActive(phone2Active);
+        screen1.SetActive(phone1Active);
+        screen2.SetActive(phone2Active);
     }
 
     void SetScreens()

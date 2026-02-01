@@ -25,6 +25,7 @@ public class HourglassPuzzle : Puzzle
         if (Flippable)
         {
             Hourglassed();
+            BombManager.instance.GetBAM().ButtonClickSFX();
         }
     }
 
@@ -38,7 +39,7 @@ public class HourglassPuzzle : Puzzle
 
         yield return new WaitForSeconds(HourglassTimer);
 
-        
+        BombManager.instance.GetBAM().DingSFX();
         Flippable = true;
         Debug.Log("Hourglass finished at timestamp : " + Time.time);
         HourglassCounter++;
