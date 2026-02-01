@@ -5,9 +5,8 @@ namespace Manager
 {
     public class InteractHandler : MonoBehaviour
     {
-        [SerializeField] private AlienManager manager;
         private PlayerInput playerInput;
-        private float minimumProximity = 10f;
+        private float minimumProximity = 2.5f;
         private void Awake()
         {
             playerInput = GetComponent<PlayerInput>();
@@ -21,14 +20,16 @@ namespace Manager
 
         public void Interact(InputAction.CallbackContext obj)
         {
+            if (AlienManager.Instance == null) return;
+            
             float closestDistance = minimumProximity;
             Child victim = null;
-            foreach (var child in manager.children)
+            
+            foreach (var child in AlienManager.Instance.children)
             {
                 float dist = Vector3.Distance(transform.position, child.transform.position);
                 if (dist < closestDistance && child.state != Child.ChildState.Abused)
                 {
-                    child.Abuse();
                     closestDistance = dist;
                     victim = child;
                 }
@@ -38,6 +39,12 @@ namespace Manager
             {
                 victim.Abuse();
             }
+        }
+        
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawLine(transform.position, transform.position + (minimumProximity * Camera.main.transform.forward));
         }
     }
 }

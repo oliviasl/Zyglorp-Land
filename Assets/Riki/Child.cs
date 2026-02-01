@@ -21,24 +21,25 @@ namespace Manager
         
         private int patrolIdx;
         
-        [SerializeField] private AlienManager manager;
-        [SerializeField] private Transform player;
+        private Transform player;
         private HelmetHandler helmetHandler;
-        
         
         private NavMeshAgent agent;
         private float viewConeAngle = 30f;
-        private float viewConeRange = 10f;
-        private float minimumProximity = 5f;
+        private float viewConeRange = 6f;
+        private float minimumProximity = 2f;
       
         public void Start()
         {
             state = ChildState.Patrol;
             agent = GetComponent<NavMeshAgent>();
+            player = FindFirstObjectByType<CharacterController>().GetComponent<Transform>();
             helmetHandler = player.GetComponent<HelmetHandler>();
             patrolIdx = Random.Range(0, patrolPoints.Count);
             agent.SetDestination(patrolPoints[patrolIdx].position);
-            manager.children.Add(this);
+            
+            if(AlienManager.Instance == null) Debug.LogError("AlienManager is null");
+            AlienManager.Instance.children.Add(this);
         }
 
         public void Update()
@@ -68,13 +69,13 @@ namespace Manager
                     break;
                 case ChildState.Abused:
                     abused = true;
-                    manager.AlertAbuse();
+                    agent.ResetPath();
+                    AlienManager.Instance.AlertAbuse();
                     break;
                 case ChildState.Cry:
                     abused = false;
-                    agent.isStopped = true;
                     agent.ResetPath();
-                    manager.AlertCry(transform.position);
+                    AlienManager.Instance.AlertCry(transform.position);
                     break;
             }
         }
@@ -125,7 +126,7 @@ namespace Manager
         }
         private void CheckPlayerMask()
         {
-            if (state == ChildState.Cry) return;
+            if (state != ChildState.Patrol) return;
             Vector3 directionToPlayer = (player.position - transform.position).normalized; //get the direction again lol
 
             float angleToPlayer = Vector3.Angle(transform.forward, directionToPlayer);
@@ -148,6 +149,7 @@ namespace Manager
             Gizmos.color = Color.yellow;
             Gizmos.DrawLine(transform.position, transform.position + leftBoudnry);
             Gizmos.DrawLine(transform.position, transform.position + rightBoudnry);
+            Gizmos.DrawLine(transform.position, transform.position + (Vector3.forward * minimumProximity));
         }
     }
 }

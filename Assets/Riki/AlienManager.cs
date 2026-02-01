@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using Manager;
 using UnityEngine;
@@ -7,6 +6,7 @@ using Random = UnityEngine.Random;
 
 public class AlienManager : MonoBehaviour
 {
+    public static AlienManager Instance { get; private set; }
     public List<Child> children; 
     public List<Transform> patrolPoints;
     public enum ManagerState
@@ -20,23 +20,35 @@ public class AlienManager : MonoBehaviour
     private ManagerState state = ManagerState.Patrol;
     private int patrolIdx;
     
-    [SerializeField] private Transform player;
+    private Transform player;
     private HelmetHandler helmetHandler;
     
     private NavMeshAgent agent;
     private float viewConeAngle = 65f;
-    private float viewConeRange = 20f;
+    private float viewConeRange = 12f;
     private float minimumProximity = 1f;
-    private float chaseSpeedBoost = 0f;
+    private float chaseSpeedBoost = 1.75f;
     
     private bool findingChild;
     private float childCareTime = 5f;
     private float timeTended;
 
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
 
     public void Start()
     {
         state = ManagerState.Patrol;
+        player = FindFirstObjectByType<CharacterController>().GetComponent<Transform>();
         helmetHandler = player.GetComponent<HelmetHandler>();
         agent = GetComponent<NavMeshAgent>();
         patrolIdx = Random.Range(0, patrolPoints.Count);
@@ -74,18 +86,17 @@ public class AlienManager : MonoBehaviour
                 Debug.Log("changing state to patrol");
                 break;
             case ManagerState.Tending:
-                agent.isStopped = true;
                 agent.ResetPath();
                 findingChild = false;
                 Debug.Log("changing state to tending");
                 break;
             case ManagerState.Chase:
                 findingChild = false;
+                agent.ResetPath();
                 agent.SetDestination(player.position);
                 Debug.Log("changing state to chase");
                 break;
             case ManagerState.Abduct:
-                agent.isStopped = true;
                 agent.ResetPath();
                 Debug.Log("changing state to abduct");
                 break;
@@ -95,14 +106,25 @@ public class AlienManager : MonoBehaviour
     #region State Behavior
     private void CheckRemainingDistance()
     {
-        float dist = agent.remainingDistance;
-        if (dist != Mathf.Infinity && agent.pathStatus == NavMeshPathStatus.PathComplete)
+
+        
+
+        if (findingChild) 
         {
-            if (findingChild && agent.remainingDistance <= minimumProximity)
+            Vector3 directionToChild = (agent.pathEndPosition - transform.position).normalized;
+            float angleToPlayer = Vector3.Angle(transform.forward, directionToChild);
+            float distanceToChild = Vector3.Distance(transform.position, agent.pathEndPosition);
+            
+            if(angleToPlayer <= viewConeAngle / 2f && distanceToChild <= viewConeRange/2 && agent.remainingDistance <= minimumProximity)
             {
+                Debug.Log($"tending child at dist {distanceToChild}");
                 HandleStateChange(ManagerState.Tending);
             }
-            else if(agent.remainingDistance == 0)
+        }
+        else
+        {
+            float dist = agent.remainingDistance;
+            if (dist != Mathf.Infinity && agent.pathStatus == NavMeshPathStatus.PathComplete && agent.remainingDistance == 0)
             {
                 SetNewPatrolPoint();
             }
@@ -127,6 +149,7 @@ public class AlienManager : MonoBehaviour
             && agent.pathStatus == NavMeshPathStatus.PathComplete 
             && agent.remainingDistance <= minimumProximity)
         {
+            Debug.Log($"got player at dist {distToPlayer}");
             HandleStateChange(ManagerState.Abduct);
         }
     }
@@ -180,6 +203,7 @@ public class AlienManager : MonoBehaviour
 
     private void SetNewPatrolPoint()
     {
+        Debug.Log("setting new patrol point");
         int oldPatrolIdx = patrolIdx;
         while (patrolIdx == oldPatrolIdx)
         {
