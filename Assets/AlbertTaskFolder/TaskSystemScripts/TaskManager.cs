@@ -41,7 +41,7 @@ public class TaskManager : MonoBehaviour
     [SerializeField] Image[] scribbleImage; //the scribbled out versions of the task, just put it on top
 
     [Header("End Game Info")]
-    [SerializeField] private Image blackImageToCoverScreen;
+    [SerializeField] private GameObject blackImageToCoverScreen;
     [SerializeField] private float endGameDelay;
     [SerializeField] private AudioClip explosionSFX;
 
@@ -129,7 +129,7 @@ public class TaskManager : MonoBehaviour
             taskHasBeenFailed = true;
             listOfTasks[3].taskCompleted = true;
         }
-        else if(displayedTime == 18)
+        else if(displayedTime == 10)
         {
             BombExplodes();
         }
@@ -200,7 +200,7 @@ public class TaskManager : MonoBehaviour
 
     IEnumerator WaitToIncreaseTime()
     {
-        while (displayedTime <= 18)
+        while (displayedTime <= 9)
         {
             yield return new WaitForSeconds(timeAnHourTakes);
             displayedTime += 1;
