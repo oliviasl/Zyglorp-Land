@@ -5,7 +5,12 @@ public class OpeartionPuzzle : Puzzle
     [SerializeField] GameObject ButtonStart;
     [SerializeField] GameObject ButtonEnd;
     bool gameActive = false;
-    ShowHide handler = ShowHide.instance;
+    [SerializeField] ShowHide handler = ShowHide.instance;
+
+    void Start()
+    {
+        handler.Hide(ButtonEnd);
+    }
 
     public void StartGame()
     {
