@@ -9,6 +9,11 @@ public class HelmetHandler : MonoBehaviour
     [SerializeField] private Animator maskAnim;
     [SerializeField] private string triggerToPutOn;
     [SerializeField] private string triggerToPutOff;
+    [SerializeField] private GameObject audioSourceObj;
+
+    [Header("Audio JBL")]
+    [SerializeField] private Transform closeTransform;
+    [SerializeField] private Transform farTransform;
 
     [SerializeField] private GameObject helmetUICanvas;
     private ShowHide handler;
@@ -66,6 +71,9 @@ public class HelmetHandler : MonoBehaviour
 
             StartCoroutine(RotateBack());
             _bombAnim.SetBool("up", false);
+
+            audioSourceObj.transform.position = farTransform.position;
+
             //maskAnim.SetTrigger(triggerToPutOn);
 
         }
@@ -79,6 +87,10 @@ public class HelmetHandler : MonoBehaviour
             StartCoroutine(RotateToBomb());
             _bombAnim.SetBool("up", true);
             maskAnim.SetTrigger(triggerToPutOff);
+
+            audioSourceObj.transform.position = closeTransform.position;
+
+            
         }
     }
 
