@@ -3,7 +3,7 @@ using UnityEngine;
 public abstract class Puzzle : MonoBehaviour
 {
     private bool solved = false;
-    BombManager bm;
+    protected BombManager bm;
     [SerializeField] GameObject[] toDisable; //list of all the UI elements that should turn off when you solve this puzzle
     //[SerializeField] Animator animator; //the animator of the thing you want to animate when the puzzle is solved
     //{SerializeField] string animToPlay; //the name of the boolean for the animation you want to play when the puzzle is solved
@@ -23,6 +23,7 @@ public abstract class Puzzle : MonoBehaviour
     {
         solved = true;
         BombManager.instance.CheckProgress();
+        BombManager.instance.GetBAM().SuccessSFX();
         foreach (GameObject g in toDisable)
         {
             ShowHide.instance.Hide(g);
