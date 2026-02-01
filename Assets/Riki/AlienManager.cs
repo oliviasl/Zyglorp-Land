@@ -140,11 +140,11 @@ public class AlienManager : MonoBehaviour
 
     private void Chase()
     {
-        agent.destination = player.position;
-        float distToPlayer = agent.remainingDistance;
+        agent.SetDestination(player.position);
+        float distToPlayer = Vector3.Distance(transform.position, player.position);
         if (distToPlayer != Mathf.Infinity 
             && agent.pathStatus == NavMeshPathStatus.PathComplete 
-            && agent.remainingDistance <= minimumProximity)
+            && distToPlayer <= minimumProximity)
         {
             Debug.Log($"got player at dist {distToPlayer}");
             HandleStateChange(ManagerState.Abduct);
@@ -175,6 +175,7 @@ public class AlienManager : MonoBehaviour
         // player is in view
         if (angleToPlayer <= viewConeAngle / 2f && distanceToPlayer <= viewConeRange)
         {
+            Debug.Log($"found player at dist {distanceToPlayer}");
             HandleStateChange(ManagerState.Chase);
         }
     }
@@ -220,6 +221,7 @@ public class AlienManager : MonoBehaviour
         // player is in view
         if(angleToPlayer <= viewConeAngle / 2f && distanceToPlayer <= viewConeRange && !helmetHandler.GetIsHelmetOn())
         {
+            Debug.Log($"found player at dist {distanceToPlayer}");
             HandleStateChange(ManagerState.Chase);
         }
     }
