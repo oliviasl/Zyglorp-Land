@@ -152,14 +152,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AlienManager
   children: []
-  patrolPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   saucer: {fileID: 0}
-  spawnPoint: {x: -1.4085, y: 1.19, z: -5.8914}
+  spawnPoint: {fileID: 0}
   fadeScreen: {fileID: 0}
+  walkPoint: {x: 0, y: 0, z: 0}
+  walkPointSet: 0
+  walkPointRange: 100
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1001 &1670541774962313333
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -28,6 +28,7 @@ public class BombRotate : MonoBehaviour
     {
         if (!isRotating)
         {
+            BombManager.instance.GetBAM().ButtonClickSFX();
             handler.Hide(faces[currentFace]);
             StartCoroutine(RotationCoroutine(left));
         }

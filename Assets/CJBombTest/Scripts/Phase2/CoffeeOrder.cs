@@ -7,6 +7,8 @@ public class CoffeeOrder : Puzzle
     [SerializeField] float ragebaitTimer = 10f;
     [SerializeField] GameObject phone1;
     [SerializeField] GameObject phone2;
+    [SerializeField] GameObject screen1;
+    [SerializeField] GameObject screen2;
     [SerializeField] CoffeeWindow[] windows;
     [SerializeField] TMP_Text[] phone1TextBoxes;
     [SerializeField] TMP_Text[] phone2TextBoxes;
@@ -28,16 +30,20 @@ public class CoffeeOrder : Puzzle
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        //base.Solve();
+        
         Reset();
         phone1Active = true;
         phone2Active = false;
         SetPhones();
         myCoroutine = StartCoroutine(SwitchPhones());
+        
     }
     
     public void MakeChoice(string choice)
     {
         playerString += choice;
+        BombManager.instance.GetBAM().BeepSFX();
         Debug.Log(playerString);
         currentScreen++;
         SetScreens();
@@ -56,7 +62,6 @@ public class CoffeeOrder : Puzzle
 
     public void Continue()
     {
-        Debug.Log(playerString + "+" + correctString);
         if (playerString.Equals(correctString))
         {
             base.Solve();
@@ -64,12 +69,13 @@ public class CoffeeOrder : Puzzle
         }
         else
         {
+            BombManager.instance.GetBAM().FailureSFX();
             Reset();
         }
     }
 
     public void Reset()
-    {
+    { 
         playerString = "";
         currentScreen = 0;
         SetScreens();
@@ -79,6 +85,8 @@ public class CoffeeOrder : Puzzle
     {
         phone1.SetActive(phone1Active);
         phone2.SetActive(phone2Active);
+        screen1.SetActive(phone1Active);
+        screen2.SetActive(phone2Active);
     }
 
     void SetScreens()

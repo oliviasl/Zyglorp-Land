@@ -393,7 +393,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5362715087832561606}
         m_TargetAssemblyTypeName: Cypher, Assembly-CSharp
-        m_MethodName: Clear
+        m_MethodName: ClickClear
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1020,6 +1020,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7583039871333781570}
+  - component: {fileID: 3271475433401675558}
   m_Layer: 5
   m_Name: ChildTracker
   m_TagString: Untagged
@@ -1049,6 +1050,18 @@ RectTransform:
   m_AnchoredPosition: {x: -10, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &3271475433401675558
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 537309136337853576}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &635586299831256303
 GameObject:
   m_ObjectHideFlags: 0
@@ -1230,8 +1243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 956c1428eab525f4a9be829edf95cca5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::KickChild
-  toDisable:
-  - {fileID: 537309136337853576}
+  toDisable: []
   childText: {fileID: 6738478746353312061}
   requiredChildren: 15
 --- !u!1 &686734488465356190
@@ -2324,6 +2336,7 @@ GameObject:
   - component: {fileID: 3463866964613702811}
   - component: {fileID: 4213011911630755159}
   - component: {fileID: 4182596687025392672}
+  - component: {fileID: 5771734130211531794}
   m_Layer: 5
   m_Name: Player Response
   m_TagString: Untagged
@@ -2450,6 +2463,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!225 &5771734130211531794
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1056780519450431955}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1112269164630329692
 GameObject:
   m_ObjectHideFlags: 0
@@ -2918,6 +2943,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4451140965524396418}
+  - component: {fileID: 4857727836296539054}
   m_Layer: 5
   m_Name: PhoneHolder
   m_TagString: Untagged
@@ -2945,6 +2971,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &4857727836296539054
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1801280412324024185}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &2215417902538676893
 GameObject:
   m_ObjectHideFlags: 0
@@ -3094,7 +3132,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8882918666896123101
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3681,6 +3719,7 @@ GameObject:
   - component: {fileID: 5620716268139843357}
   - component: {fileID: 942208305013988017}
   - component: {fileID: 2259145055970725749}
+  - component: {fileID: 5138934618055331541}
   m_Layer: 5
   m_Name: f
   m_TagString: Untagged
@@ -3807,6 +3846,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!225 &5138934618055331541
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2737135662598760508}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &2757727223751407331
 GameObject:
   m_ObjectHideFlags: 0
@@ -4223,6 +4274,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4007307255697571069}
+  - component: {fileID: 4045744688079789316}
   m_Layer: 5
   m_Name: PhoneHolder
   m_TagString: Untagged
@@ -4250,6 +4302,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &4045744688079789316
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2997467659783798673}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &3346282278173606383
 GameObject:
   m_ObjectHideFlags: 0
@@ -4701,8 +4765,6 @@ MonoBehaviour:
   toDisable:
   - {fileID: 2997467659783798673}
   - {fileID: 1801280412324024185}
-  - {fileID: 0}
-  - {fileID: 5180395143944984412}
   ragebaitTimer: 10
   phone1: {fileID: 6899819402698445040}
   phone2: {fileID: 8781012225531424357}
@@ -5048,10 +5110,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Cypher
   toDisable:
-  - {fileID: 0}
   - {fileID: 2737135662598760508}
   - {fileID: 1056780519450431955}
-  - {fileID: 365713302095057205}
   answer: BLORK
   playerText: {fileID: 4182596687025392672}
 --- !u!1 &4053980705856750151
@@ -6158,7 +6218,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3381061473706324659
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6343,6 +6403,7 @@ GameObject:
   - component: {fileID: 7876210108256475001}
   - component: {fileID: 7663033394856329061}
   - component: {fileID: 2902849717244573727}
+  - component: {fileID: 4408796695356723026}
   m_Layer: 5
   m_Name: Coffee Order
   m_TagString: Untagged
@@ -6471,6 +6532,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!225 &4408796695356723026
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5180395143944984412}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &5243912783564197693
 GameObject:
   m_ObjectHideFlags: 0
@@ -10326,7 +10399,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1469126885292801522
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11075,6 +11148,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2721818695707481915}
+  - component: {fileID: 2460885343411563280}
   m_Layer: 0
   m_Name: decor
   m_TagString: Untagged
@@ -11099,6 +11173,18 @@ Transform:
   - {fileID: 2584639628979540759}
   m_Father: {fileID: 3381061473706324659}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!225 &2460885343411563280
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8265330484917194077}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &8397409362927177072
 GameObject:
   m_ObjectHideFlags: 0
