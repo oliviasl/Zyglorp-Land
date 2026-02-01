@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a40b20d0ae9810b42893d4cc48f8a58e
+guid: 65e72768afa7a5c47a84c8bcf190f47f
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -31,11 +31,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: IDLE
-      takeName: IDLE
-      internalID: 2126459665172807778
-      firstFrame: 0
-      lastFrame: 30
+      name: CALM
+      takeName: CALM
+      internalID: -8816258247222484707
+      firstFrame: 270
+      lastFrame: 330
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -58,7 +58,7 @@ ModelImporter:
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+      additiveReferencePoseFrame: 270
     isReadable: 0
   meshes:
     lODScreenPercentages: []
