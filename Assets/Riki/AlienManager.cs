@@ -153,10 +153,26 @@ public class AlienManager : MonoBehaviour
         }
     }
 
+    // WHEN YOU ARE ABDUCTED SHOULD STAY COMMENTED
     private IEnumerator Abduct()
     {
-        player.GetComponent<FirstPersonController>();
+        // // get beamed up to saucer for 5 seconds
+        // var controller = player.GetComponent<FirstPersonController>();
+        // controller.EnableMovement(false);
+        // float originalGravity = controller.Gravity;
+        // controller.Gravity *= -1;
+        // saucer.transform.position = player.position + Vector3.up * 20f;
+        // yield return new WaitForSeconds(5f);
+        //
+        // // tranport to reset area?
+        // controller.Gravity = 0f;
         yield return new WaitForSeconds(5f);
+        //
+        // // restore movement and gravity, hide saucer
+        // saucer.transform.position = new Vector3(100f, 100f, 100f);
+        // controller.EnableMovement(true);
+        // controller.Gravity = originalGravity;
+        // HandleStateChange(ManagerState.Patrol);
     }
     
     #endregion
