@@ -11,7 +11,12 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource oneShot5;
 
     [SerializeField] private AudioSource bossChaseMusic;
-    [SerializeField] private AudioSource bombMusic;
+    [SerializeField] public AudioSource bombMusic;
+
+    [SerializeField] public AudioClip lowBombMusic;
+    [SerializeField] public AudioClip lowBombMangMusic;
+    [SerializeField] public AudioClip highBombMusic;
+    [SerializeField] public AudioClip highBombMangMusic;
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -24,6 +29,8 @@ public class AudioManager : MonoBehaviour
 
         }
     }
+
+
 
     public void PlayBossMusic()
     {
@@ -39,6 +46,8 @@ public class AudioManager : MonoBehaviour
             }
         }
     }
+
+
     
     public void PlayOneShot(AudioClip clipToPlay)
     {
