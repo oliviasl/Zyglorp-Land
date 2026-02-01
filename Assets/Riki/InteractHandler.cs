@@ -21,13 +21,22 @@ namespace Manager
 
         public void Interact(InputAction.CallbackContext obj)
         {
+            float closestDistance = minimumProximity;
+            Child victim = null;
             foreach (var child in manager.children)
             {
                 float dist = Vector3.Distance(transform.position, child.transform.position);
-                if (dist <= minimumProximity && child.state != Child.ChildState.Abused)
+                if (dist < closestDistance && child.state != Child.ChildState.Abused)
                 {
                     child.Abuse();
+                    closestDistance = dist;
+                    victim = child;
                 }
+            }
+
+            if (victim != null)
+            {
+                victim.Abuse();
             }
         }
     }

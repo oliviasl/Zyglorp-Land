@@ -24,9 +24,10 @@ public class AlienManager : MonoBehaviour
     private HelmetHandler helmetHandler;
     
     private NavMeshAgent agent;
-    private float viewConeAngle = 45f;
+    private float viewConeAngle = 65f;
     private float viewConeRange = 20f;
     private float minimumProximity = 1f;
+    private float chaseSpeedBoost = 0f;
     
     private bool findingChild;
     private float childCareTime = 5f;
@@ -144,6 +145,8 @@ public class AlienManager : MonoBehaviour
     
     public void AlertAbuse()
     {
+        Debug.Log("abuse alert");
+        if (state == ManagerState.Abduct || state == ManagerState.Chase) return;
         Vector3 directionToPlayer = (player.position - transform.position).normalized; //get the direction again lol
 
         float angleToPlayer = Vector3.Angle(transform.forward, directionToPlayer);
@@ -159,6 +162,7 @@ public class AlienManager : MonoBehaviour
     public void AlertCry(Vector3 pos)
     {
         Debug.Log("baby alert");
+        if (state == ManagerState.Chase || state == ManagerState.Abduct) return;
         agent.ResetPath();
         agent.SetDestination(pos);
         findingChild = true;
@@ -201,9 +205,6 @@ public class AlienManager : MonoBehaviour
     
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, viewConeAngle);
-
         //cone below
         Vector3 leftBoudnry = Quaternion.Euler(0, -viewConeAngle / 2f, 0) * transform.forward * viewConeRange;
         Vector3 rightBoudnry = Quaternion.Euler(0, viewConeAngle / 2f, 0) * transform.forward * viewConeRange;
