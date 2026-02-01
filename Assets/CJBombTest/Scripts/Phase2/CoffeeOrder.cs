@@ -5,6 +5,7 @@ using TMPro;
 public class CoffeeOrder : Puzzle
 {
     [SerializeField] float ragebaitTimer = 10f;
+    [SerializeField] float appearTime = 0.1f;
     [SerializeField] GameObject phone1;
     [SerializeField] GameObject phone2;
     [SerializeField] GameObject screen1;
@@ -83,10 +84,35 @@ public class CoffeeOrder : Puzzle
 
     void SetPhones()
     {
+        phone1.SetActive(false);
+        phone2.SetActive(false);
+
+        StartCoroutine(ScreenShrinker());
+    }
+
+    IEnumerator ScreenShrinker()
+    {
+        float scale = 0;
+        while (scale < appearTime)
+        {
+            scale += Time.deltaTime * appearTime;
+            float scale1 = Mathf.Clamp01(scale / appearTime);
+            float scale2 = Mathf.Clamp01((appearTime - scale) / appearTime);
+
+            if (phone1Active)
+            {
+                screen1.transform.localScale = new Vector3(scale1, scale1, scale1);
+                screen2.transform.localScale = new Vector3(scale2, scale2, scale2);
+            }
+            else
+            {
+                screen2.transform.localScale = new Vector3(scale1, scale1, scale1);
+                screen1.transform.localScale = new Vector3(scale2, scale2, scale2);
+            }
+            yield return null;
+        }
         phone1.SetActive(phone1Active);
         phone2.SetActive(phone2Active);
-        screen1.SetActive(phone1Active);
-        screen2.SetActive(phone2Active);
     }
 
     void SetScreens()
