@@ -561,6 +561,7 @@ GameObject:
   - component: {fileID: 2958345829273853914}
   - component: {fileID: 5999311641215925610}
   - component: {fileID: 4603433905178699798}
+  - component: {fileID: 4820552960358983545}
   m_Layer: 5
   m_Name: Zorp
   m_TagString: Untagged
@@ -681,6 +682,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!225 &4820552960358983545
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1737453207885520462}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &2303945113283022696
 GameObject:
   m_ObjectHideFlags: 0
@@ -854,7 +867,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 8.857}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 215.1, y: 183}
+  m_AnchoredPosition: {x: 201.6, y: 183}
   m_SizeDelta: {x: 150, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8403400221369919704
@@ -1505,13 +1518,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GlorpIt
   toDisable:
   - {fileID: 6514561458336045762}
-  - {fileID: 6360725582467765398}
   - {fileID: 8448980002295141283}
-  - {fileID: 2610098741528098419}
   - {fileID: 1087748853405779203}
-  - {fileID: 1535385169553908387}
   - {fileID: 1737453207885520462}
-  - {fileID: 2503682053661456063}
   waitTime: 3
   answers: 0000000001000000000000000200000001000000010000000200000000000000
   clips:
@@ -2134,6 +2143,10 @@ PrefabInstance:
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 5710835394247823542}
+    - target: {fileID: 2486456646230046099, guid: d243a9eeeacc666439daa5d40d593c0e, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2952918920017643953, guid: d243a9eeeacc666439daa5d40d593c0e, type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
