@@ -1095,7 +1095,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6157304797102810580}
-  - component: {fileID: 2959696999916062580}
   - component: {fileID: 6933300576225969447}
   m_Layer: 0
   m_Name: bombRoot
@@ -1120,14 +1119,6 @@ Transform:
   - {fileID: 8229254176839287514}
   m_Father: {fileID: 6492233874519588978}
   m_LocalEulerAnglesHint: {x: 25, y: 0, z: 0}
---- !u!81 &2959696999916062580
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4116468354884152877}
-  m_Enabled: 1
 --- !u!95 &6933300576225969447
 Animator:
   serializedVersion: 7
