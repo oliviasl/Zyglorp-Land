@@ -40,6 +40,11 @@ public class TaskManager : MonoBehaviour
     [SerializeField] TMP_Text[] listOfTaskNumbers;
     [SerializeField] Image[] scribbleImage; //the scribbled out versions of the task, just put it on top
 
+    [Header("End Game Info")]
+    [SerializeField] private Image blackImageToCoverScreen;
+    [SerializeField] private float endGameDelay;
+    [SerializeField] private AudioClip explosionSFX;
+
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -124,10 +129,32 @@ public class TaskManager : MonoBehaviour
             taskHasBeenFailed = true;
             listOfTasks[3].taskCompleted = true;
         }
-       
-        UpdateTaskUI();
+        else if(displayedTime == 18)
+        {
+            BombExplodes();
+        }
+
+            UpdateTaskUI();
         
         
+    }
+
+    private void BombExplodes()
+    {
+        if(explosionSFX != null)
+        {
+            // call sound
+        }
+        blackImageToCoverScreen.gameObject.SetActive(true); //have text animations on this object
+        StartCoroutine(WaitToExplode());
+
+    }
+
+    IEnumerator WaitToExplode()
+    {
+        yield return new WaitForSeconds(endGameDelay);
+        Application.Quit();
+        Debug.Log("Bomb went off!");
     }
 
     private void UpdateTaskObjects()
@@ -173,7 +200,7 @@ public class TaskManager : MonoBehaviour
 
     IEnumerator WaitToIncreaseTime()
     {
-        while (displayedTime <= 17)
+        while (displayedTime <= 18)
         {
             yield return new WaitForSeconds(timeAnHourTakes);
             displayedTime += 1;
@@ -201,5 +228,9 @@ public class TaskManager : MonoBehaviour
             Debug.Log(displayedTime);
             Debug.Log(displayedTimeToShow);
         }
+
+        
+
+        CheckTaskCompletion();
     }
 }
