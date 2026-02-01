@@ -131,6 +131,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6378229781750264150}
   - component: {fileID: 2934974725688510063}
+  - component: {fileID: 2093719707189309574}
   m_Layer: 0
   m_Name: BombHolder
   m_TagString: Untagged
@@ -174,6 +175,18 @@ MonoBehaviour:
   - {fileID: 1837220710817189967}
   currentPhase: 0
   rotator: {fileID: 2547905317212930123}
+--- !u!114 &2093719707189309574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 597471101930300229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d70a8d2fb2e4c4004a5e104a7c80aa37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShowHide
 --- !u!1 &2152468178932922565
 GameObject:
   m_ObjectHideFlags: 0
@@ -1486,6 +1499,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6138578260018688528}
     m_Modifications:
+    - target: {fileID: 5710835394247823542, guid: 92d3a518a9803ec48a192481c7dbd37e, type: 3}
+      propertyPath: bm
+      value: 
+      objectReference: {fileID: 2934974725688510063}
     - target: {fileID: 7109956563529432870, guid: 92d3a518a9803ec48a192481c7dbd37e, type: 3}
       propertyPath: bm
       value: 
