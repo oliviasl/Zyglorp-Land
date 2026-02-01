@@ -21,7 +21,7 @@ public class SamplePuzzle : Puzzle
             //he says that you suck
             youSuck.SetActive(true);
             //play air horn sound effect or something
-            base.bm.GetBAM().AirHornSFX();
+            BombManager.instance.GetBAM().AirHornSFX();
         }
     }
 }

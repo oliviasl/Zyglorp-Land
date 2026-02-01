@@ -114,7 +114,8 @@ public class AlienManager : MonoBehaviour
             // THE "ON STATE CHANGE" ABDUCT
             case ManagerState.Abduct:
                 agent.ResetPath();
-                agent.SetDestination(player.position + Camera.main.transform.forward * 2f);
+                walkPoint = transform.position;
+                // agent.SetDestination(player.position + Camera.main.transform.forward * 2f);
                 controller.EnableMovement(false);
                 helmetHandler.abduction = true;
                 saucer.transform.position = player.position + Vector3.up * 20f;
@@ -129,27 +130,6 @@ public class AlienManager : MonoBehaviour
     #region State Behavior
     private void Patrol()
     {
-        // if (findingChild) 
-        // {
-        //     Vector3 directionToChild = (agent.pathEndPosition - transform.position).normalized;
-        //     float angleToPlayer = Vector3.Angle(transform.forward, directionToChild);
-        //     float distanceToChild = Vector3.Distance(transform.position, agent.pathEndPosition);
-        //     
-        //     if(angleToPlayer <= viewConeAngle / 2f && distanceToChild <= viewConeRange/2 && agent.remainingDistance <= minimumProximity * 3f)
-        //     {
-        //         Debug.Log($"tending child at dist {distanceToChild}");
-        //         HandleStateChange(ManagerState.Tending);
-        //     }
-        // }
-        // else
-        // {
-        //     float dist = agent.remainingDistance;
-        //     if (dist != Mathf.Infinity && agent.pathStatus == NavMeshPathStatus.PathComplete && agent.remainingDistance == 0)
-        //     {
-        //         SetNewPatrolPoint();
-        //     }
-        // }
-        
         if (!walkPointSet)
         {
             SetNewPatrolPoint();
@@ -163,15 +143,16 @@ public class AlienManager : MonoBehaviour
 
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
 
+        if (findingChild && distanceToWalkPoint.magnitude < 2f)
+        {
+            Debug.Log($"tending child at dist {distanceToWalkPoint}");
+            HandleStateChange(ManagerState.Tending);
+        }
+        
         if (distanceToWalkPoint.magnitude < 1f)
         {
             walkPointSet = false;
             // managerAnim.SetBool("IsWalking", false);
-            if (findingChild)
-            {
-                Debug.Log($"tending child at dist {distanceToWalkPoint}");
-                HandleStateChange(ManagerState.Tending);
-            }
         }
     }
 
@@ -188,14 +169,23 @@ public class AlienManager : MonoBehaviour
     private void Chase()
     {
         agent.SetDestination(player.position);
-        float distToPlayer = Vector3.Distance(transform.position, player.position);
-        if (distToPlayer != Mathf.Infinity 
-            && agent.pathStatus == NavMeshPathStatus.PathComplete 
-            && distToPlayer <= minimumProximity)
+        
+        Vector3 distanceToWalkPoint = transform.position - walkPoint;
+
+        if (distanceToWalkPoint.magnitude < 1.15f)
         {
-            Debug.Log($"got player at dist {distToPlayer}");
+            Debug.Log($"got player at dist {distanceToWalkPoint}");
             HandleStateChange(ManagerState.Abduct);
         }
+
+        // float distToPlayer = Vector3.Distance(transform.position, player.position);
+        // if (distToPlayer != Mathf.Infinity 
+        //     && agent.pathStatus == NavMeshPathStatus.PathComplete 
+        //     && distToPlayer <= minimumProximity)
+        // {
+        //     Debug.Log($"got player at dist {distToPlayer}");
+        //     HandleStateChange(ManagerState.Abduct);
+        // }
     }
 
     
@@ -242,6 +232,7 @@ public class AlienManager : MonoBehaviour
     {
         Debug.Log("baby alert");
         if (state == ManagerState.Chase || state == ManagerState.Abduct) return;
+        walkPoint = pos;
         agent.ResetPath();
         agent.SetDestination(pos);
         findingChild = true;
@@ -274,12 +265,6 @@ public class AlienManager : MonoBehaviour
     private void SetNewPatrolPoint()
     {
         Debug.Log("setting new patrol point");
-        // int oldPatrolIdx = patrolIdx;
-        // while (patrolIdx == oldPatrolIdx)
-        // {
-        //     patrolIdx = Random.Range(0, patrolPoints.Count);
-        // }
-        // agent.SetDestination(patrolPoints[patrolIdx].position);
         
         float randomZ = Random.Range(-walkPointRange, walkPointRange);
         float randomX = Random.Range(-walkPointRange, walkPointRange);
