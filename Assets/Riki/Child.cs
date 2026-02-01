@@ -6,6 +6,9 @@ namespace Manager
 {
     public class Child : MonoBehaviour, IInteractable
     {
+        [Header("Animation")]
+        [SerializeField] private Animator kidAnim;
+
         public List<Transform> patrolPoints; 
         public enum ChildState
         {
@@ -117,6 +120,7 @@ namespace Manager
             if (walkPointSet)
             {
                 agent.SetDestination(walkPoint);
+                kidAnim.SetBool("IsWalking", true);
                 //agent.SetDestination(new Vector3(0f, 0f, 0f));
             }
 
@@ -125,6 +129,7 @@ namespace Manager
             if (distanceToWalkPoint.magnitude < 1f)
             {
                 walkPointSet = false;
+                kidAnim.SetBool("IsWalking", false);
             }
         }
 
@@ -156,11 +161,13 @@ namespace Manager
         public void Abuse()
         {
             HandleStateChange(ChildState.Abused);
+            kidAnim.SetTrigger("KidShoved");
         }
 
         public void Tend()
         {
             HandleStateChange(ChildState.Patrol);
+            kidAnim.SetTrigger("KidCalmed");
         }
         
         private void SetNewPatrolPoint()

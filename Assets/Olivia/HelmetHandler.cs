@@ -5,6 +5,11 @@ using StarterAssets;
 
 public class HelmetHandler : MonoBehaviour
 {
+    [Header("Animation")]
+    [SerializeField] private Animator maskAnim;
+    [SerializeField] private string triggerToPutOn;
+    [SerializeField] private string triggerToPutOff;
+
     [SerializeField] private GameObject helmetUICanvas;
     private ShowHide handler;
 
@@ -52,7 +57,7 @@ public class HelmetHandler : MonoBehaviour
         _bIsHelmetOn = !_bIsHelmetOn;
 
         // camera stuff
-        if (_bIsHelmetOn)
+        if (_bIsHelmetOn) //taking mask on
         {
             controller.EnableMovement(true);
             controller.EnableLook(true);
@@ -61,8 +66,10 @@ public class HelmetHandler : MonoBehaviour
 
             StartCoroutine(RotateBack());
             _bombAnim.SetBool("up", false);
+            //maskAnim.SetTrigger(triggerToPutOn);
+
         }
-        else
+        else //putting mask off
         {
             controller.EnableMovement(false);
             controller.EnableLook(false);
@@ -71,6 +78,7 @@ public class HelmetHandler : MonoBehaviour
 
             StartCoroutine(RotateToBomb());
             _bombAnim.SetBool("up", true);
+            maskAnim.SetTrigger(triggerToPutOff);
         }
     }
 

@@ -7,11 +7,14 @@ public class TaskZone : MonoBehaviour, IInteractable
     // [SerializeField] public Material ogMat;
     // [SerializeField] public Material outlineMat;
     [SerializeField] private Renderer rend;
+    [SerializeField] private Animator playerAnim;
+    [SerializeField] private string triggerForInteract;
 
 
     private void Start()
     {
         rend = GetComponent<Renderer>();
+        
     }
     public void Interact()
     {
@@ -21,6 +24,7 @@ public class TaskZone : MonoBehaviour, IInteractable
             TaskManager.instance.UpdateTaskUI();
             Debug.Log("Task Completed");
             rend.enabled = false;
+            playerAnim.SetTrigger(triggerForInteract);
             
         }
         
