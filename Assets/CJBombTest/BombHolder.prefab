@@ -852,6 +852,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6138578260018688528}
     m_Modifications:
+    - target: {fileID: 1013268691271764103, guid: 2cdd48f4d80c6184c912fcdfb1e00621, type: 3}
+      propertyPath: bm
+      value: 
+      objectReference: {fileID: 2934974725688510063}
     - target: {fileID: 2819095893497777014, guid: 2cdd48f4d80c6184c912fcdfb1e00621, type: 3}
       propertyPath: bm
       value: 
@@ -868,6 +872,10 @@ PrefabInstance:
       propertyPath: youSuck
       value: 
       objectReference: {fileID: 7720963978904946774}
+    - target: {fileID: 3592479376360127017, guid: 2cdd48f4d80c6184c912fcdfb1e00621, type: 3}
+      propertyPath: bm
+      value: 
+      objectReference: {fileID: 2934974725688510063}
     - target: {fileID: 5362715087832561606, guid: 2cdd48f4d80c6184c912fcdfb1e00621, type: 3}
       propertyPath: bm
       value: 
