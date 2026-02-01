@@ -106,16 +106,13 @@ public class AlienManager : MonoBehaviour
     #region State Behavior
     private void CheckRemainingDistance()
     {
-
-        
-
         if (findingChild) 
         {
             Vector3 directionToChild = (agent.pathEndPosition - transform.position).normalized;
             float angleToPlayer = Vector3.Angle(transform.forward, directionToChild);
             float distanceToChild = Vector3.Distance(transform.position, agent.pathEndPosition);
             
-            if(angleToPlayer <= viewConeAngle / 2f && distanceToChild <= viewConeRange/2 && agent.remainingDistance <= minimumProximity)
+            if(angleToPlayer <= viewConeAngle / 2f && distanceToChild <= viewConeRange/2 && agent.remainingDistance <= minimumProximity * 3f)
             {
                 Debug.Log($"tending child at dist {distanceToChild}");
                 HandleStateChange(ManagerState.Tending);
