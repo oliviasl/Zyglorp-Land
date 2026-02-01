@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using Manager;
 using StarterAssets;
@@ -8,6 +7,8 @@ using Random = UnityEngine.Random;
 
 public class AlienManager : MonoBehaviour
 {
+    // i am SO sorry i just put everythong here i deserve death by firiing squad
+    //                                                  - chopped chungus chud
     public static AlienManager Instance { get; private set; }
     public List<Child> children; 
     public List<Transform> patrolPoints;
@@ -20,6 +21,9 @@ public class AlienManager : MonoBehaviour
     }
 
     [SerializeField] private Transform saucer;
+    [SerializeField] private Vector3 spawnPoint;
+    [SerializeField] private Canvas fadeScreen;
+    private FirstPersonController controller;
     
     private ManagerState state = ManagerState.Patrol;
     private int patrolIdx;
@@ -31,7 +35,12 @@ public class AlienManager : MonoBehaviour
     private float viewConeAngle = 65f;
     private float viewConeRange = 12f;
     private float minimumProximity = 1f;
+    
     private float chaseSpeedBoost = 1.75f;
+    
+    private float abductTime = 5f;
+    private float abductTimeElapsed = 0f;
+    private float abductSpeed = 2f;
     
     private bool findingChild;
     private float childCareTime = 5f;
@@ -57,6 +66,7 @@ public class AlienManager : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         patrolIdx = Random.Range(0, patrolPoints.Count);
         agent.SetDestination(patrolPoints[patrolIdx].position);
+        controller = player.GetComponent<FirstPersonController>();
     }
 
     public void Update()
@@ -67,12 +77,14 @@ public class AlienManager : MonoBehaviour
             case ManagerState.Patrol:
                 CheckRemainingDistance();
                 break;
-            // wait certain time and resume patrol
             case ManagerState.Tending:
                 TendChildren();
                 break;
             case ManagerState.Chase:
                 Chase();
+                break;
+            case ManagerState.Abduct:
+                Abduct();
                 break;
         }
     }
@@ -97,10 +109,17 @@ public class AlienManager : MonoBehaviour
                 agent.SetDestination(player.position);
                 Debug.Log("changing state to chase");
                 break;
+            // THE "ON STATE CHANGE" ABDUCT
             case ManagerState.Abduct:
                 agent.ResetPath();
+                agent.SetDestination(player.position + Camera.main.transform.forward * 2f);
+                controller.EnableMovement(false);
+                helmetHandler.abduction = true;
+                saucer.transform.position = player.position + Vector3.up * 20f;
+                abductTimeElapsed = 0f;
+                helmetHandler.HideMaskScreen();
+                GetComponent<Collider>().enabled = false;
                 Debug.Log("changing state to abduct");
-                StartCoroutine(Abduct());
                 break;
         }
     }
@@ -153,26 +172,20 @@ public class AlienManager : MonoBehaviour
         }
     }
 
-    // WHEN YOU ARE ABDUCTED SHOULD STAY COMMENTED
-    private IEnumerator Abduct()
+    
+    // THE "UPDATE" FUNCTION FOR ABDUCT
+    private void Abduct()
     {
-        // // get beamed up to saucer for 5 seconds
-        // var controller = player.GetComponent<FirstPersonController>();
-        // controller.EnableMovement(false);
-        // float originalGravity = controller.Gravity;
-        // controller.Gravity *= -1;
-        // saucer.transform.position = player.position + Vector3.up * 20f;
-        // yield return new WaitForSeconds(5f);
-        //
-        // // tranport to reset area?
-        // controller.Gravity = 0f;
-        yield return new WaitForSeconds(5f);
-        //
-        // // restore movement and gravity, hide saucer
-        // saucer.transform.position = new Vector3(100f, 100f, 100f);
-        // controller.EnableMovement(true);
-        // controller.Gravity = originalGravity;
-        // HandleStateChange(ManagerState.Patrol);
+        abductTimeElapsed += Time.deltaTime;
+        player.transform.position += Vector3.up * (abductSpeed * controller.Gravity * Time.deltaTime);
+        if (abductTimeElapsed >= abductTime)
+        {
+            fadeScreen.enabled = true;
+            if (abductTimeElapsed >= abductTime * 2)
+            {
+                Reset();
+            }
+        }
     }
     
     #endregion
@@ -206,6 +219,20 @@ public class AlienManager : MonoBehaviour
         agent.ResetPath();
         agent.SetDestination(pos);
         findingChild = true;
+    }
+
+    // THE STUFF THAT HAPPENS WHEN PLAYER RESETS
+    public void Reset()
+    {
+        HandleStateChange(ManagerState.Patrol);
+        saucer.transform.position = new Vector3(100f, 100f, 100f);
+        controller.EnableMovement(false);
+        abductTimeElapsed = 0f;
+        player.transform.position = spawnPoint;
+        fadeScreen.enabled = false;
+        helmetHandler.abduction = false;
+        helmetHandler.ShowMaskScreen();
+        GetComponent<Collider>().enabled = true;
     }
     
     #region Helper Functions

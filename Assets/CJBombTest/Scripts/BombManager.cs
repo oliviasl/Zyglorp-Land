@@ -72,6 +72,8 @@ public class BombManager : MonoBehaviour
                 f.SetActive(false);
             }
         }
+
+        if (rotator == null) return;
         rotator.UpdateFaces(phases[currentPhase].GetFaces());
     }
 }
