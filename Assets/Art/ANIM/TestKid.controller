@@ -1,5 +1,31 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1102 &-8564718632855738093
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ENTERCRY
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: eba3266e26bca6743bb62521c1052905, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1102 &-5270975547782790445
 AnimatorState:
   serializedVersion: 6
@@ -21,32 +47,6 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7400000, guid: 6dd2fc72044cc7a4b9d06811f339b535, type: 2}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &-1511927024491019933
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: GETUP
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: -5058448292262677288, guid: 8923847e592bde741806c474638f70e1, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -74,14 +74,14 @@ AnimatorController:
     m_IKPass: 0
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
---- !u!1102 &3664813940899007557
+--- !u!1102 &2776842430572318152
 AnimatorState:
   serializedVersion: 6
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: CRYLOOP
+  m_Name: GETUP 1
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -94,7 +94,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 3906545329572430811, guid: d334cc14b16df1049832cf0832a4a5c0, type: 3}
+  m_Motion: {fileID: 7400000, guid: 3c171f539a92d92438d274fdcc1b7d98, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -110,15 +110,6 @@ AnimatorStateMachine:
   m_Name: Base Layer
   m_ChildStates:
   - serializedVersion: 1
-    m_State: {fileID: 4473544774986082273}
-    m_Position: {x: 240, y: 380, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 3664813940899007557}
-    m_Position: {x: 382.51523, y: 161.58789, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -1511927024491019933}
-    m_Position: {x: 621.0072, y: 376.01184, z: 0}
-  - serializedVersion: 1
     m_State: {fileID: 6324409778148183130}
     m_Position: {x: 380, y: 500, z: 0}
   - serializedVersion: 1
@@ -127,6 +118,15 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: -5270975547782790445}
     m_Position: {x: 716.1852, y: 590.4358, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 5068475328590714954}
+    m_Position: {x: 667.4038, y: 363.08588, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -8564718632855738093}
+    m_Position: {x: 645.93164, y: 343.99945, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 2776842430572318152}
+    m_Position: {x: 462.2248, y: 332.07043, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -136,15 +136,15 @@ AnimatorStateMachine:
   m_EntryPosition: {x: 50, y: 120, z: 0}
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
-  m_DefaultState: {fileID: 4473544774986082273}
---- !u!1102 &4473544774986082273
+  m_DefaultState: {fileID: 6324409778148183130}
+--- !u!1102 &5068475328590714954
 AnimatorState:
   serializedVersion: 6
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 12
+  m_Name: CRYLOOP 1
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -157,7 +157,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 99f4934249cbb004390b4e798fae56f1, type: 2}
+  m_Motion: {fileID: 7400000, guid: e4b50b0deb557074f9bea0ce080ee148, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
