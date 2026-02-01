@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1b7c9867a9ef8d34786fc5887009408c
+guid: 086bd80a02dac134c97daeedf7340205
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -7,8 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: paw_texture
-    second: {fileID: 2100000, guid: 2e2c9b2de0522ff48b3a3f7f14f80a85, type: 2}
+      name: model_AlienSkin
+    second: {fileID: 2100000, guid: c292b3aaebc377648bce4e61e70c7e4c, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
