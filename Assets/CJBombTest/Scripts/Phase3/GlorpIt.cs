@@ -7,6 +7,7 @@ public class GlorpIt : Puzzle
     [SerializeField] float waitTime = 3f; //how long you have to react before the game considers a lack of input a fail
     [SerializeField] int[] answers; //correct answers. Should be 0, 1, or 2
     [SerializeField] AudioClip[] clips; //list of audio clips
+    [SerializeField] Animator[] animators; //list of animators
     [SerializeField] TMP_Text tempIndicator; //THIS INDICATOR IS TEMP, DELETE IT ONCE WE GET AUDIO
     [SerializeField] string[] tempGlorps; //THIS SET IS TEMP DELETE IT ONCE WE GET AUDIO
     [SerializeField] AudioSource audioS;
@@ -34,6 +35,7 @@ public class GlorpIt : Puzzle
         NewClip();
     }
 
+	// called by bomb animaiton manager
     public void Glorp(int ans)
     {
         if(ans == answers[currentClip] && takingAnswers)
@@ -57,8 +59,8 @@ public class GlorpIt : Puzzle
         takingAnswers = true;
         correct = false;
         //TEMP MEASURE UNTIL WE GET SOUND CLIPS:
-        tempIndicator.text = tempGlorps[answers[currentClip]];
-        Debug.Log("Answer Now");
+        //tempIndicator.text = tempGlorps[answers[currentClip]];
+        //Debug.Log("Answer Now");
 
         //play the sound effect from clips[currentClip]
         audioS.clip = clips[answers[currentClip]];
@@ -103,6 +105,6 @@ public class GlorpIt : Puzzle
         StopCoroutine(currentCoroutine);
 
         //TEMP MEASURE:
-        tempIndicator.text = "START!";
+        //tempIndicator.text = "START!";
     }
 }

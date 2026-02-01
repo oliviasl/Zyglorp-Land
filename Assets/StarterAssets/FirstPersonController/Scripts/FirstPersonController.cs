@@ -64,7 +64,8 @@ namespace StarterAssets
 		private float _jumpTimeoutDelta;
 		private float _fallTimeoutDelta;
 
-		[SerializeField] private bool isAbleToMove;
+		private bool isAbleToMove = true;
+		private bool isAbleToLook = true;
 
 	
 #if ENABLE_INPUT_SYSTEM
@@ -133,6 +134,8 @@ namespace StarterAssets
 
 		private void CameraRotation()
 		{
+			if (!isAbleToLook) { return; }
+
 			// if there is an input
 			if (_input.look.sqrMagnitude >= _threshold)
 			{
@@ -277,6 +280,11 @@ namespace StarterAssets
 		public void EnableMovement(bool enable)
 		{
 			isAbleToMove = enable;
+		}
+
+		public void EnableLook(bool enable)
+		{
+			isAbleToLook = enable;
 		}
 	}
 }

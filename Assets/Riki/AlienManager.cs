@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using Manager;
 using StarterAssets;
@@ -8,9 +7,10 @@ using Random = UnityEngine.Random;
 
 public class AlienManager : MonoBehaviour
 {
+    // i am SO sorry i just put everythong here i deserve death by firiing squad
+    //                                                  - chopped chungus chud
     public static AlienManager Instance { get; private set; }
-    public List<Child> children; 
-    public List<Transform> patrolPoints;
+    public List<Child> children;
     public enum ManagerState
     {
         Patrol,
@@ -19,19 +19,31 @@ public class AlienManager : MonoBehaviour
         Abduct
     }
 
+    public ManagerState state = ManagerState.Patrol;
+    
     [SerializeField] private Transform saucer;
+    [SerializeField] private Transform spawnPoint;
+    [SerializeField] private Canvas fadeScreen;
     
-    private ManagerState state = ManagerState.Patrol;
-    private int patrolIdx;
-    
+    private FirstPersonController controller;
     private Transform player;
     private HelmetHandler helmetHandler;
     
+    [SerializeField] private Vector3 walkPoint;
+    [SerializeField] private bool walkPointSet;
+    [SerializeField] private float walkPointRange;
+    [SerializeField] private LayerMask whatIsGround;
+        
     private NavMeshAgent agent;
     private float viewConeAngle = 65f;
     private float viewConeRange = 12f;
     private float minimumProximity = 1f;
+    
     private float chaseSpeedBoost = 1.75f;
+    
+    private float abductTime = 5f;
+    private float abductTimeElapsed = 0f;
+    private float abductSpeed = 2f;
     
     private bool findingChild;
     private float childCareTime = 5f;
@@ -55,8 +67,8 @@ public class AlienManager : MonoBehaviour
         player = FindFirstObjectByType<CharacterController>().GetComponent<Transform>();
         helmetHandler = player.GetComponent<HelmetHandler>();
         agent = GetComponent<NavMeshAgent>();
-        patrolIdx = Random.Range(0, patrolPoints.Count);
-        agent.SetDestination(patrolPoints[patrolIdx].position);
+        controller = player.GetComponent<FirstPersonController>();
+        SetNewPatrolPoint();
     }
 
     public void Update()
@@ -65,14 +77,16 @@ public class AlienManager : MonoBehaviour
         switch (state)
         {
             case ManagerState.Patrol:
-                CheckRemainingDistance();
+                Patrol();
                 break;
-            // wait certain time and resume patrol
             case ManagerState.Tending:
                 TendChildren();
                 break;
             case ManagerState.Chase:
                 Chase();
+                break;
+            case ManagerState.Abduct:
+                Abduct();
                 break;
         }
     }
@@ -97,35 +111,66 @@ public class AlienManager : MonoBehaviour
                 agent.SetDestination(player.position);
                 Debug.Log("changing state to chase");
                 break;
+            // THE "ON STATE CHANGE" ABDUCT
             case ManagerState.Abduct:
                 agent.ResetPath();
+                agent.SetDestination(player.position + Camera.main.transform.forward * 2f);
+                controller.EnableMovement(false);
+                helmetHandler.abduction = true;
+                saucer.transform.position = player.position + Vector3.up * 20f;
+                abductTimeElapsed = 0f;
+                helmetHandler.HideMaskScreen();
+                GetComponent<Collider>().enabled = false;
                 Debug.Log("changing state to abduct");
-                StartCoroutine(Abduct());
                 break;
         }
     }
 
     #region State Behavior
-    private void CheckRemainingDistance()
+    private void Patrol()
     {
-        if (findingChild) 
+        // if (findingChild) 
+        // {
+        //     Vector3 directionToChild = (agent.pathEndPosition - transform.position).normalized;
+        //     float angleToPlayer = Vector3.Angle(transform.forward, directionToChild);
+        //     float distanceToChild = Vector3.Distance(transform.position, agent.pathEndPosition);
+        //     
+        //     if(angleToPlayer <= viewConeAngle / 2f && distanceToChild <= viewConeRange/2 && agent.remainingDistance <= minimumProximity * 3f)
+        //     {
+        //         Debug.Log($"tending child at dist {distanceToChild}");
+        //         HandleStateChange(ManagerState.Tending);
+        //     }
+        // }
+        // else
+        // {
+        //     float dist = agent.remainingDistance;
+        //     if (dist != Mathf.Infinity && agent.pathStatus == NavMeshPathStatus.PathComplete && agent.remainingDistance == 0)
+        //     {
+        //         SetNewPatrolPoint();
+        //     }
+        // }
+        
+        if (!walkPointSet)
         {
-            Vector3 directionToChild = (agent.pathEndPosition - transform.position).normalized;
-            float angleToPlayer = Vector3.Angle(transform.forward, directionToChild);
-            float distanceToChild = Vector3.Distance(transform.position, agent.pathEndPosition);
-            
-            if(angleToPlayer <= viewConeAngle / 2f && distanceToChild <= viewConeRange/2 && agent.remainingDistance <= minimumProximity * 3f)
-            {
-                Debug.Log($"tending child at dist {distanceToChild}");
-                HandleStateChange(ManagerState.Tending);
-            }
+            SetNewPatrolPoint();
         }
-        else
+
+        if (walkPointSet)
         {
-            float dist = agent.remainingDistance;
-            if (dist != Mathf.Infinity && agent.pathStatus == NavMeshPathStatus.PathComplete && agent.remainingDistance == 0)
+            agent.SetDestination(walkPoint);
+            // managerAnim.SetBool("IsWalking", true);
+        }
+
+        Vector3 distanceToWalkPoint = transform.position - walkPoint;
+
+        if (distanceToWalkPoint.magnitude < 1f)
+        {
+            walkPointSet = false;
+            // managerAnim.SetBool("IsWalking", false);
+            if (findingChild)
             {
-                SetNewPatrolPoint();
+                Debug.Log($"tending child at dist {distanceToWalkPoint}");
+                HandleStateChange(ManagerState.Tending);
             }
         }
     }
@@ -153,10 +198,20 @@ public class AlienManager : MonoBehaviour
         }
     }
 
-    private IEnumerator Abduct()
+    
+    // THE "UPDATE" FUNCTION FOR ABDUCT
+    private void Abduct()
     {
-        player.GetComponent<FirstPersonController>();
-        yield return new WaitForSeconds(5f);
+        abductTimeElapsed += Time.deltaTime;
+        player.transform.position += Vector3.up * (abductSpeed * controller.Gravity * Time.deltaTime);
+        if (abductTimeElapsed >= abductTime)
+        {
+            fadeScreen.enabled = true;
+            if (abductTimeElapsed >= abductTime * 2)
+            {
+                Reset();
+            }
+        }
     }
     
     #endregion
@@ -191,6 +246,20 @@ public class AlienManager : MonoBehaviour
         agent.SetDestination(pos);
         findingChild = true;
     }
+
+    // THE STUFF THAT HAPPENS WHEN PLAYER RESETS
+    public void Reset()
+    {
+        HandleStateChange(ManagerState.Patrol);
+        saucer.transform.position = new Vector3(100f, 100f, 100f);
+        controller.EnableMovement(false);
+        abductTimeElapsed = 0f;
+        player.transform.position = spawnPoint.transform.position;
+        fadeScreen.enabled = false;
+        helmetHandler.abduction = false;
+        helmetHandler.ShowMaskScreen();
+        GetComponent<Collider>().enabled = true;
+    }
     
     #region Helper Functions
     private void HandleChildren()
@@ -205,12 +274,22 @@ public class AlienManager : MonoBehaviour
     private void SetNewPatrolPoint()
     {
         Debug.Log("setting new patrol point");
-        int oldPatrolIdx = patrolIdx;
-        while (patrolIdx == oldPatrolIdx)
+        // int oldPatrolIdx = patrolIdx;
+        // while (patrolIdx == oldPatrolIdx)
+        // {
+        //     patrolIdx = Random.Range(0, patrolPoints.Count);
+        // }
+        // agent.SetDestination(patrolPoints[patrolIdx].position);
+        
+        float randomZ = Random.Range(-walkPointRange, walkPointRange);
+        float randomX = Random.Range(-walkPointRange, walkPointRange);
+
+        walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
+        
+        if (Physics.Raycast(new Vector3(walkPoint.x, walkPoint.y + 5f, walkPoint.z), Vector3.down, 10f, whatIsGround))
         {
-            patrolIdx = Random.Range(0, patrolPoints.Count);
+            walkPointSet |= true;
         }
-        agent.SetDestination(patrolPoints[patrolIdx].position);
     }
     private void CheckPlayerMask()
     {

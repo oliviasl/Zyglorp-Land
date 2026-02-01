@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 095d3d602db397c49ad0f75ae94aab39, type: 3}
   m_Name: TestTaskInfo1 1
   m_EditorClassIdentifier: Assembly-CSharp::TaskInfoSO
-  taskNameText: Task2
+  taskNameText: Flip RollarCoaster Switch
   timeWhenTaskIsDue: 0
   timeToShowForTask: 0
   taskInfoText: 

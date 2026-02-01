@@ -6,7 +6,8 @@ namespace Manager
 {
     public class Child : MonoBehaviour, IInteractable
     {
-        public List<Transform> patrolPoints; 
+        [Header("Animation")]
+        [SerializeField] private Animator kidAnim;
         public enum ChildState
         {
             Patrol,
@@ -23,7 +24,13 @@ namespace Manager
         
         private Transform player;
         private HelmetHandler helmetHandler;
-        
+
+        [Header("NavMesh")]
+        [SerializeField] private Vector3 walkPoint;
+        [SerializeField] private bool walkPointSet;
+        [SerializeField] private float walkPointRange;
+        [SerializeField] private LayerMask whatIsGround;
+
         private NavMeshAgent agent;
         private float viewConeAngle = 30f;
         private float viewConeRange = 6f;
@@ -35,8 +42,7 @@ namespace Manager
             agent = GetComponent<NavMeshAgent>();
             player = FindFirstObjectByType<CharacterController>().GetComponent<Transform>();
             helmetHandler = player.GetComponent<HelmetHandler>();
-            patrolIdx = Random.Range(0, patrolPoints.Count);
-            agent.SetDestination(patrolPoints[patrolIdx].position);
+            Patroling();
             
             if(AlienManager.Instance == null) Debug.LogError("AlienManager is null");
             AlienManager.Instance.children.Add(this);
@@ -48,7 +54,7 @@ namespace Manager
             switch (state)
             {
                 case ChildState.Patrol:
-                    CheckDistance();
+                    Patroling();
                     break;
                 case ChildState.Abused:
                     Recover();
@@ -65,7 +71,7 @@ namespace Manager
             {
                 case ChildState.Patrol:
                     abused = false;
-                    SetNewPatrolPoint();
+                    Patroling();
                     break;
                 case ChildState.Abused:
                     abused = true;
@@ -80,14 +86,45 @@ namespace Manager
             }
         }
 
-        private void CheckDistance()
+        private void SearchForPatrolPoint()
         {
-            float dist = agent.remainingDistance;
-            if (dist != Mathf.Infinity 
-                && agent.pathStatus == NavMeshPathStatus.PathComplete 
-                && agent.remainingDistance <= minimumProximity)
+            float randomZ = Random.Range(-walkPointRange, walkPointRange);
+            float randomX = Random.Range(-walkPointRange, walkPointRange);
+
+            walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
+
+            /* if(Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
+             {
+                 walkPointSet = true;
+             }
+            */
+
+            if (Physics.Raycast(new Vector3(walkPoint.x, walkPoint.y + 5f, walkPoint.z), Vector3.down, 10f, whatIsGround))
             {
-                SetNewPatrolPoint();
+                walkPointSet |= true;
+            }
+        }
+
+        public void Patroling()
+        {
+            if (!walkPointSet)
+            {
+                SearchForPatrolPoint();
+            }
+
+            if (walkPointSet)
+            {
+                agent.SetDestination(walkPoint);
+                kidAnim.SetBool("IsWalking", true);
+                //agent.SetDestination(new Vector3(0f, 0f, 0f));
+            }
+
+            Vector3 distanceToWalkPoint = transform.position - walkPoint;
+
+            if (distanceToWalkPoint.magnitude < 1f)
+            {
+                walkPointSet = false;
+                kidAnim.SetBool("IsWalking", false);
             }
         }
 
@@ -108,21 +145,13 @@ namespace Manager
         public void Abuse()
         {
             HandleStateChange(ChildState.Abused);
+            kidAnim.SetTrigger("KidShoved");
         }
 
         public void Tend()
         {
             HandleStateChange(ChildState.Patrol);
-        }
-        
-        private void SetNewPatrolPoint()
-        {
-            int oldPatrolIdx = patrolIdx;
-            while (patrolIdx == oldPatrolIdx)
-            {
-                patrolIdx = Random.Range(0, patrolPoints.Count);
-            }
-            agent.SetDestination(patrolPoints[patrolIdx].position);
+            kidAnim.SetTrigger("KidCalmed");
         }
         private void CheckPlayerMask()
         {

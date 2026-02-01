@@ -4,20 +4,23 @@ using System.Collections;
 public class BombRotate : MonoBehaviour
 {
     [SerializeField] GameObject bomb;
-    [SerializeField] float rotationTime; //how long a rotation takes
+    float rotationTime = 0.5f; //how long a rotation takes
     [SerializeField] GameObject[] faces; //set of currently active faces
     [SerializeField] int currentFace = 0;
     private bool isRotating = false;
 
+    ShowHide handler;
+
     void Start()
     {
+        handler = ShowHide.instance;
         currentFace = 0;
         bomb = this.gameObject;
-        foreach(GameObject face in faces)
+        foreach (GameObject face in faces)
         {
-            face.SetActive(false);
+            handler.Hide(face);
         }
-        faces[0].SetActive(true);
+        handler.Show(faces[0]);
     }
 
     //rotate the bomb left or right. Check the boolean to make it rotate left
@@ -25,7 +28,7 @@ public class BombRotate : MonoBehaviour
     {
         if (!isRotating)
         {
-            faces[currentFace].SetActive(false);
+            handler.Hide(faces[currentFace]);
             StartCoroutine(RotationCoroutine(left));
         }
     }
@@ -36,9 +39,10 @@ public class BombRotate : MonoBehaviour
         float totalDegrees = 0;
         float degrees = 90;
 
-        if (left) {
+        if (left)
+        {
             degrees = -90;
-            if(currentFace == 0)
+            if (currentFace == 0)
             {
                 currentFace = faces.Length - 1;
             }
@@ -81,21 +85,21 @@ public class BombRotate : MonoBehaviour
         }
 
         isRotating = false;
-        faces[currentFace].SetActive(true);
+        handler.Show(faces[currentFace]);
     }
 
     //update all the faces. This is called by BombManager when a phase progresses
     public void UpdateFaces(GameObject[] newFaces)
     {
-        for(int i = 0; i < faces.Length; i++)
+        for (int i = 0; i < faces.Length; i++)
         {
             faces[i] = newFaces[i];
         }
 
         foreach (GameObject face in faces)
         {
-            face.SetActive(false);
+            handler.Hide(face);
         }
-        faces[currentFace].SetActive(true);
+        handler.Show(faces[currentFace]);
     }
 }

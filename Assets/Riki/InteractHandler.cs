@@ -5,6 +5,11 @@ namespace Manager
 {
     public class InteractHandler : MonoBehaviour
     {
+        [SerializeField] private Animator playerAnim;
+       
+        [SerializeField] string[] triggersForShoveAnimations;
+
+
         private PlayerInput playerInput;
         private float minimumProximity = 2.5f;
         private void Awake()
@@ -38,6 +43,16 @@ namespace Manager
             if (victim != null)
             {
                 victim.Abuse();
+                //if(victim.GetComponent<Animator>() != null)
+                //{
+                //kidAnim = victim.GetComponent<Animator>();
+                //   int randomIndex = Random.Range(0, triggersForShoveAnimations.Length);
+                //   playerAnim.SetTrigger(triggersForShoveAnimations[randomIndex]);
+                //kidAnim.SetTrigger(triggersForShoveAnimations[randomIndex]);
+                // }
+
+                int randomIndex = Random.Range(0, triggersForShoveAnimations.Length);
+                playerAnim.SetTrigger(triggersForShoveAnimations[randomIndex]);
             }
         }
         

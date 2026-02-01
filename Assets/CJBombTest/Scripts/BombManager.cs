@@ -7,6 +7,7 @@ public class BombManager : MonoBehaviour
     [SerializeField] Phase[] phases; // the array holding all the puzzles of each phase
     [SerializeField] int currentPhase = 0;
     [SerializeField] BombRotate rotator;
+    [SerializeField] Animator bombAnimator;
 
     void Awake()
     {
@@ -32,7 +33,7 @@ public class BombManager : MonoBehaviour
     public void CheckProgress()
     {
         bool allSolved = true;
-        foreach(Puzzle p in phases[currentPhase].GetPuzzles())
+        foreach (Puzzle p in phases[currentPhase].GetPuzzles())
         {
             if (!p.GetSolved())
             {
@@ -50,28 +51,32 @@ public class BombManager : MonoBehaviour
     void ProgressPhase()
     {
         currentPhase++;
-        if(currentPhase == phases.Length)
+        if (currentPhase == phases.Length)
         {
             //you win
             Debug.Log("You win!");
         }
         else
         {
-            UpdateAllFaces();
+            bombAnimator.SetInteger("stage", currentPhase);
+            // animator is handling this now...
+            // UpdateAllFaces();
         }
-        
+
     }
 
     //sets all faces to disabled, then passes the new set of faces into BombRotate
-    void UpdateAllFaces()
+    public void UpdateAllFaces()
     {
         foreach (Phase p in phases)
         {
             foreach (GameObject f in p.GetFaces())
             {
-                f.SetActive(false);
+                ShowHide.instance.Hide(f);
             }
         }
+
+        if (rotator == null) return;
         rotator.UpdateFaces(phases[currentPhase].GetFaces());
     }
 }

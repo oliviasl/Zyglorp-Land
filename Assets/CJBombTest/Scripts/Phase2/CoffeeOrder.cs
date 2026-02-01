@@ -28,11 +28,14 @@ public class CoffeeOrder : Puzzle
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        base.Solve();
+        /*
         Reset();
         phone1Active = true;
         phone2Active = false;
         SetPhones();
-        myCoroutine = StartCoroutine(SwitchPhones());
+        myCoroutine = StartCoroutine(SwitchPhones());*/
+        
     }
     
     public void MakeChoice(string choice)

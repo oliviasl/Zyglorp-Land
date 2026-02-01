@@ -1,5 +1,6 @@
 using System.Collections;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -27,11 +28,22 @@ public class TaskManager : MonoBehaviour
     [SerializeField] private InputActionReference taskAction;
     [SerializeField] private bool taskListIsVisible;
 
+    [Header("Task GameObjects")]
+    [SerializeField] private GameObject task1Object;
+    [SerializeField] private GameObject task2Object;
+    [SerializeField] private GameObject task3Object;
+    [SerializeField] private GameObject task4Object;
+
     [Header("Task UI Info")]
     [SerializeField] GameObject completeTaskUICanvas;
     [SerializeField] TMP_Text[] listOfTaskNames;
     [SerializeField] TMP_Text[] listOfTaskNumbers;
     [SerializeField] Image[] scribbleImage; //the scribbled out versions of the task, just put it on top
+
+    [Header("End Game Info")]
+    [SerializeField] private GameObject blackImageToCoverScreen;
+    [SerializeField] private float endGameDelay;
+    [SerializeField] private AudioClip explosionSFX;
 
     private void Awake()
     {
@@ -117,9 +129,53 @@ public class TaskManager : MonoBehaviour
             taskHasBeenFailed = true;
             listOfTasks[3].taskCompleted = true;
         }
-       
-        UpdateTaskUI();
+        else if(displayedTime == 10)
+        {
+            BombExplodes();
+        }
+
+            UpdateTaskUI();
         
+        
+    }
+
+    public void StartTimer()
+    {
+        timerStarted = true;
+    }
+
+    private void BombExplodes()
+    {
+        if(explosionSFX != null)
+        {
+            // call sound
+        }
+        blackImageToCoverScreen.gameObject.SetActive(true); //have text animations on this object
+        StartCoroutine(WaitToExplode());
+
+    }
+
+    IEnumerator WaitToExplode()
+    {
+        yield return new WaitForSeconds(endGameDelay);
+        Application.Quit();
+        Debug.Log("Bomb went off!");
+    }
+
+    private void UpdateTaskObjects()
+    {
+        if(displayedTime > 3 || listOfTasks[0].taskCompleted)
+        {
+            task2Object.SetActive(true);
+        }
+        if (displayedTime > 5 || listOfTasks[1].taskCompleted)
+        {
+            task3Object.SetActive(true);
+        }
+        if (displayedTime > 7 || listOfTasks[2].taskCompleted)
+        {
+            task4Object.SetActive(true);
+        }
     }
     public void UpdateTaskUI()
     {
@@ -142,12 +198,14 @@ public class TaskManager : MonoBehaviour
 
         }
 
+        UpdateTaskObjects();
+
 
     }
 
     IEnumerator WaitToIncreaseTime()
     {
-        while (displayedTime <= 17)
+        while (displayedTime <= 9)
         {
             yield return new WaitForSeconds(timeAnHourTakes);
             displayedTime += 1;
@@ -175,5 +233,9 @@ public class TaskManager : MonoBehaviour
             Debug.Log(displayedTime);
             Debug.Log(displayedTimeToShow);
         }
+
+        
+
+        CheckTaskCompletion();
     }
 }
