@@ -8,6 +8,7 @@ public class BombManager : MonoBehaviour
     [SerializeField] int currentPhase = 0;
     [SerializeField] BombRotate rotator;
     [SerializeField] Animator bombAnimator;
+    [SerializeField] BombAudioManager bam;
 
     void Awake()
     {
@@ -26,6 +27,16 @@ public class BombManager : MonoBehaviour
     {
         currentPhase = 0;
         UpdateAllFaces();
+    }
+
+    public BombAudioManager GetBAM()
+    {
+        return bam;
+    }
+
+    public int GetPhase()
+    {
+        return currentPhase;
     }
 
     //gets called automatiaclly whenever a puzzle is Solved
@@ -50,6 +61,7 @@ public class BombManager : MonoBehaviour
     //progresses phase
     void ProgressPhase()
     {
+        bam.NextPhaseSFX();
         currentPhase++;
         if (currentPhase == phases.Length)
         {

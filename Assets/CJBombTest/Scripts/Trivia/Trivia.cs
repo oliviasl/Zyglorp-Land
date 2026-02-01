@@ -28,11 +28,13 @@ public class Trivia : Puzzle
         { 
             currentQuestion++;
             //success sound effect
+            BombManager.instance.GetBAM().BeepSFX();
         }
         else
         {
             currentQuestion = 0;
             //fail sound effect
+            BombManager.instance.GetBAM().FailureSFX();
         }
 
         if(currentQuestion == questions.Length)

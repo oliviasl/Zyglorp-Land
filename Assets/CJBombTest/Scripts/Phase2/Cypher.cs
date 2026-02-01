@@ -15,6 +15,7 @@ public class Cypher : Puzzle
     public void PressKey(string s)
     {
         playerResponse += s;
+        BombManager.instance.GetBAM().ButtonClickSFX();
         Debug.Log(playerResponse);
         playerText.text = playerResponse;
         if (playerResponse.Equals(answer))
@@ -22,6 +23,7 @@ public class Cypher : Puzzle
             base.Solve();   
         }
         else if (playerResponse.Length > answer.Length) {
+            BombManager.instance.GetBAM().FailureSFX();
             Clear();
         }
     }
@@ -30,5 +32,11 @@ public class Cypher : Puzzle
     {
         playerResponse = "";
         playerText.text = playerResponse;
+    }
+
+    public void ClickClear()
+    {
+        BombManager.instance.GetBAM().ButtonClickSFX();
+        Clear();
     }
 }

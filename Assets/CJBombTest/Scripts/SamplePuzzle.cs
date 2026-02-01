@@ -11,6 +11,7 @@ public class SamplePuzzle : Puzzle
 
     public void CutWire(bool correct)
     {
+        BombManager.instance.GetBAM().CutWireSFX();
         if (correct)
         {
             base.Solve();
@@ -20,6 +21,7 @@ public class SamplePuzzle : Puzzle
             //he says that you suck
             youSuck.SetActive(true);
             //play air horn sound effect or something
+            base.bm.GetBAM().AirHornSFX();
         }
     }
 }

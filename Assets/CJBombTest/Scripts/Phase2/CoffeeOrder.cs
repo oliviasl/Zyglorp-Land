@@ -28,19 +28,20 @@ public class CoffeeOrder : Puzzle
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        base.Solve();
-        /*
+        //base.Solve();
+        
         Reset();
         phone1Active = true;
         phone2Active = false;
         SetPhones();
-        myCoroutine = StartCoroutine(SwitchPhones());*/
+        myCoroutine = StartCoroutine(SwitchPhones());
         
     }
     
     public void MakeChoice(string choice)
     {
         playerString += choice;
+        BombManager.instance.GetBAM().BeepSFX();
         Debug.Log(playerString);
         currentScreen++;
         SetScreens();
@@ -59,7 +60,6 @@ public class CoffeeOrder : Puzzle
 
     public void Continue()
     {
-        Debug.Log(playerString + "+" + correctString);
         if (playerString.Equals(correctString))
         {
             base.Solve();
@@ -73,6 +73,7 @@ public class CoffeeOrder : Puzzle
 
     public void Reset()
     {
+        BombManager.instance.GetBAM().FailureSFX();
         playerString = "";
         currentScreen = 0;
         SetScreens();
