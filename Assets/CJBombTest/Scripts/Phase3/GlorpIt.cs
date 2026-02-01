@@ -40,9 +40,17 @@ public class GlorpIt : Puzzle
     {
         if(ans == answers[currentClip] && takingAnswers)
         {
-            if (!correct)
+            if(ans == 0)
             {
-                //play correct answer noise
+                BombManager.instance.GetBAM().GlorpSFX();
+            }
+            else if (ans == 1)
+            {
+                BombManager.instance.GetBAM().FlorpSFX();
+            }
+            else if (ans == 2)
+            {
+                BombManager.instance.GetBAM().ZorpSFX();
             }
 
             correct = true;
@@ -102,6 +110,7 @@ public class GlorpIt : Puzzle
         Debug.Log("You failed");
         currentClip = 0;
         //play failure noise
+        BombManager.instance.GetBAM().FailureSFX();
         StopCoroutine(currentCoroutine);
 
         //TEMP MEASURE:

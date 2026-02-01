@@ -1515,9 +1515,9 @@ MonoBehaviour:
   waitTime: 3
   answers: 0000000001000000000000000200000001000000010000000200000000000000
   clips:
-  - {fileID: 8300000, guid: 85e700608ebd25b4493bb4d77ab0851f, type: 3}
-  - {fileID: 8300000, guid: d9c72c83f089ac441b0704ecfcc25b9a, type: 3}
-  - {fileID: 8300000, guid: f319a3c58f4ca4c42a108ba37a13f456, type: 3}
+  - {fileID: 8300000, guid: 03cc8d7dbd9e0b14b81b9689e837d21b, type: 3}
+  - {fileID: 8300000, guid: 37528021c5cf97140989a507957dcce2, type: 3}
+  - {fileID: 8300000, guid: 0452893ff30978f439e6373a7a74dd61, type: 3}
   animators: []
   tempIndicator: {fileID: 7140379757703564399}
   tempGlorps:
