@@ -69,7 +69,7 @@ public class BombManager : MonoBehaviour
         {
             foreach (GameObject f in p.GetFaces())
             {
-                f.SetActive(false);
+                ShowHide.instance.Hide(f);
             }
         }
 
