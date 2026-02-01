@@ -4,8 +4,8 @@ using UnityEngine;
 public class TaskZone : MonoBehaviour, IInteractable
 {
     [SerializeField] private Tasks taskToComplete;
-    [SerializeField] public Material ogMat;
-    [SerializeField] public Material outlineMat;
+   // [SerializeField] public Material ogMat;
+   // [SerializeField] public Material outlineMat;
 
     public void Interact()
     {

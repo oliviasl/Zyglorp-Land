@@ -38,12 +38,12 @@ public class PlayerInteraction : MonoBehaviour
             currentInteractable = interactable;
             Debug.Log("Near interactable object:" + other.name);
             Renderer renderer = other.GetComponent<Renderer>();
-            if(other.GetComponent<TaskZone>() != null)
-            {
+            //if(other.GetComponent<TaskZone>() != null)
+            //{
                 
-                other.GetComponent<Renderer>().material = other.GetComponent<TaskZone>().outlineMat;
-                Debug.Log("Outline Time");
-            }
+               // other.GetComponent<Renderer>().material = other.GetComponent<TaskZone>().outlineMat;
+              // Debug.Log("Outline Time");
+           // }
             //interactUIObjext.SetActive(true);
         }
     }
@@ -56,10 +56,10 @@ public class PlayerInteraction : MonoBehaviour
         {
             currentInteractable = null;
             Debug.Log("Left interactable object");
-            if (other.GetComponent<TaskZone>() != null)
-            {
-                other.GetComponent<Renderer>().material = other.GetComponent<TaskZone>().ogMat;
-            }
+            //if (other.GetComponent<TaskZone>() != null)
+           // {
+            //    other.GetComponent<Renderer>().material = other.GetComponent<TaskZone>().ogMat;
+            //}
             //interactUIObjext.SetActive(false);
         }
     }
