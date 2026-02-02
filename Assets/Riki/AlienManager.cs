@@ -189,9 +189,9 @@ public class AlienManager : MonoBehaviour
 
         agent.SetDestination(player.position);
         
-        Vector3 distanceToWalkPoint = transform.position - walkPoint;
+        Vector3 distanceToWalkPoint = transform.position - player.position;
 
-        if (distanceToWalkPoint.magnitude < 1.15f)
+        if (distanceToWalkPoint.magnitude < 5f)
         {
             Debug.Log($"got player at dist {distanceToWalkPoint}");
             HandleStateChange(ManagerState.Abduct);
