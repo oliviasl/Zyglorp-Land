@@ -38,10 +38,10 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -6987191384249934025}
-    m_Position: {x: 344.49072, y: 74.808014, z: 0}
+    m_Position: {x: 310, y: 120, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8309559544936263857}
-    m_Position: {x: 476.61603, y: -31.264465, z: 0}
+    m_Position: {x: 300, y: 20, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -67,7 +67,7 @@ AnimatorStateTransition:
   m_IsExit: 0
   serializedVersion: 3
   m_TransitionDuration: 0
-  m_TransitionOffset: 0.07061083
+  m_TransitionOffset: 0
   m_ExitTime: 1
   m_HasExitTime: 1
   m_HasFixedDuration: 1
@@ -91,10 +91,10 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0
+  m_TransitionDuration: 0.0023577735
   m_TransitionOffset: 0
-  m_ExitTime: 0.928043
-  m_HasExitTime: 1
+  m_ExitTime: 0.9669463
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -109,7 +109,7 @@ AnimatorController:
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: glorping
-    m_Type: 4
+    m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
@@ -135,7 +135,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Zorp_crank
-  m_Speed: 1
+  m_Speed: 0.1
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -4551166471905243975}
