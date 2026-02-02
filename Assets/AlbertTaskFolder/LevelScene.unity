@@ -3113,6 +3113,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4371839257877305782, guid: e1c96d0ec72dc344ca3973aadb37a3b0, type: 3}
   m_PrefabInstance: {fileID: 211956483}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &214285539 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2279553783786711472, guid: 0849f9a647383c64cb63261bd65c4fd9, type: 3}
+  m_PrefabInstance: {fileID: 1153665755}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 956c1428eab525f4a9be829edf95cca5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::KickChild
 --- !u!1 &217846065
 GameObject:
   m_ObjectHideFlags: 0
@@ -23922,6 +23933,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 147271704505529827, guid: 0849f9a647383c64cb63261bd65c4fd9, type: 3}
+      propertyPath: kc
+      value: 
+      objectReference: {fileID: 214285539}
     - target: {fileID: 1271181966819071632, guid: 0849f9a647383c64cb63261bd65c4fd9, type: 3}
       propertyPath: m_IsActive
       value: 0
