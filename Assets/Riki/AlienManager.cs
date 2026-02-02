@@ -43,7 +43,7 @@ public class AlienManager : MonoBehaviour
     private float viewConeRange = 12f;
     private float minimumProximity = 1f;
     
-    private float speedBoost = 1.75f;
+    private float speedBoost = 1f;
     
     private float abductTime = 5f;
     private float abductTimeElapsed = 0f;
@@ -191,7 +191,7 @@ public class AlienManager : MonoBehaviour
         
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
 
-        if (distanceToWalkPoint.magnitude < 1.35f)
+        if (distanceToWalkPoint.magnitude < 1.15f)
         {
             Debug.Log($"got player at dist {distanceToWalkPoint}");
             HandleStateChange(ManagerState.Abduct);
