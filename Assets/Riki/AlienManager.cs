@@ -26,8 +26,8 @@ public class AlienManager : MonoBehaviour
     [SerializeField] private Canvas fadeScreen;
     
     private FirstPersonController controller;
-    private Transform player;
     private HelmetHandler helmetHandler;
+    private Transform player;
     
     [SerializeField] private Vector3 walkPoint;
     [SerializeField] private bool walkPointSet;
@@ -39,7 +39,7 @@ public class AlienManager : MonoBehaviour
     private float viewConeRange = 12f;
     private float minimumProximity = 1f;
     
-    private float chaseSpeedBoost = 1.75f;
+    private float speedBoost = 1.75f;
     
     private float abductTime = 5f;
     private float abductTimeElapsed = 0f;
@@ -101,18 +101,25 @@ public class AlienManager : MonoBehaviour
                 Debug.Log("changing state to patrol");
                 break;
             case ManagerState.Tending:
+                agent.speed /= speedBoost;
                 agent.ResetPath();
                 findingChild = false;
                 Debug.Log("changing state to tending");
                 break;
             case ManagerState.Chase:
+                if (!findingChild)
+                {
+                    agent.speed *= speedBoost;
+                }
                 findingChild = false;
                 agent.ResetPath();
                 agent.SetDestination(player.position);
+                helmetHandler.PlayMusic(helmetHandler.GetIsHelmetOn());
                 Debug.Log("changing state to chase");
                 break;
             // THE "ON STATE CHANGE" ABDUCT
             case ManagerState.Abduct:
+                agent.speed /= speedBoost;
                 agent.ResetPath();
                 walkPoint = transform.position;
                 // agent.SetDestination(player.position + Camera.main.transform.forward * 2f);
@@ -140,7 +147,6 @@ public class AlienManager : MonoBehaviour
             agent.SetDestination(walkPoint);
             // managerAnim.SetBool("IsWalking", true);
         }
-
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
 
         if (findingChild && distanceToWalkPoint.magnitude < 2f)
@@ -172,20 +178,11 @@ public class AlienManager : MonoBehaviour
         
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
 
-        if (distanceToWalkPoint.magnitude < 1.15f)
+        if (distanceToWalkPoint.magnitude < 1.35f)
         {
             Debug.Log($"got player at dist {distanceToWalkPoint}");
             HandleStateChange(ManagerState.Abduct);
         }
-
-        // float distToPlayer = Vector3.Distance(transform.position, player.position);
-        // if (distToPlayer != Mathf.Infinity 
-        //     && agent.pathStatus == NavMeshPathStatus.PathComplete 
-        //     && distToPlayer <= minimumProximity)
-        // {
-        //     Debug.Log($"got player at dist {distToPlayer}");
-        //     HandleStateChange(ManagerState.Abduct);
-        // }
     }
 
     
@@ -236,6 +233,7 @@ public class AlienManager : MonoBehaviour
         agent.ResetPath();
         agent.SetDestination(pos);
         findingChild = true;
+        agent.speed *= speedBoost;
     }
 
     // THE STUFF THAT HAPPENS WHEN PLAYER RESETS
@@ -264,7 +262,7 @@ public class AlienManager : MonoBehaviour
 
     private void SetNewPatrolPoint()
     {
-        Debug.Log("setting new patrol point");
+        // Debug.Log("setting new patrol point");
         
         float randomZ = Random.Range(-walkPointRange, walkPointRange);
         float randomX = Random.Range(-walkPointRange, walkPointRange);
