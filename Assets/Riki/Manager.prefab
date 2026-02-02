@@ -151,6 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 023c8f197de36f542bec962851a3c67e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AlienManager
+  managerAnim: {fileID: 7819282451980157710}
   children: []
   state: 0
   saucer: {fileID: 0}
@@ -238,5 +239,10 @@ PrefabInstance:
 --- !u!4 &4207355059975281012 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9c0ef1a0323dfc14e9a7048a3b920b09, type: 3}
+  m_PrefabInstance: {fileID: 4461165487110864543}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &7819282451980157710 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 9c0ef1a0323dfc14e9a7048a3b920b09, type: 3}
   m_PrefabInstance: {fileID: 4461165487110864543}
   m_PrefabAsset: {fileID: 0}
