@@ -151,9 +151,10 @@ namespace Manager
         {
             HandleStateChange(ChildState.Abused);
             kidAnim.SetTrigger("KidShoved");
-            if (!kicked && BombManager.instance.transform)
+            if (!kicked)
             {
-                
+                BombManager.instance.KickCounter();
+                kicked = true;
             }
         }
 
