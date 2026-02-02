@@ -72,6 +72,7 @@ public class AlienManager : MonoBehaviour
         helmetHandler = player.GetComponent<HelmetHandler>();
         agent = GetComponent<NavMeshAgent>();
         controller = player.GetComponent<FirstPersonController>();
+        managerAnim.SetBool("isWalking", true);
         SetNewPatrolPoint();
     }
 
@@ -105,7 +106,7 @@ public class AlienManager : MonoBehaviour
                 Debug.Log("changing state to patrol");
                 break;
             case ManagerState.Tending:
-                //managerAnim.SetTrigger()
+                managerAnim.SetTrigger("IsCalming");
                 agent.speed /= speedBoost;
                 agent.ResetPath();
                 findingChild = false;
@@ -124,6 +125,7 @@ public class AlienManager : MonoBehaviour
                 break;
             // THE "ON STATE CHANGE" ABDUCT
             case ManagerState.Abduct:
+                managerAnim.SetTrigger("Scolding");
                 agent.speed /= speedBoost;
                 agent.ResetPath();
                 walkPoint = transform.position;
@@ -144,14 +146,15 @@ public class AlienManager : MonoBehaviour
     {
         if (!walkPointSet)
         {
+            managerAnim.SetBool("IsWalking", false);
             SetNewPatrolPoint();
         }
 
         if (walkPointSet)
         {
-            managerAnim.SetBool("IsWallking", true);
+            
             agent.SetDestination(walkPoint);
-            // managerAnim.SetBool("IsWalking", true);
+            managerAnim.SetBool("IsWalking", true);
         }
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
 
@@ -163,9 +166,9 @@ public class AlienManager : MonoBehaviour
         
         if (distanceToWalkPoint.magnitude < 1f)
         {
-            managerAnim.SetBool("IsWallking", false);
+            
             walkPointSet = false;
-            // managerAnim.SetBool("IsWalking", false);
+            managerAnim.SetBool("IsWalking", false);
         }
     }
 
@@ -182,6 +185,8 @@ public class AlienManager : MonoBehaviour
 
     private void Chase()
     {
+        managerAnim.SetTrigger("IsChasing");
+
         agent.SetDestination(player.position);
         
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
@@ -247,6 +252,7 @@ public class AlienManager : MonoBehaviour
     // THE STUFF THAT HAPPENS WHEN PLAYER RESETS
     public void Reset()
     {
+        managerAnim.SetTrigger("DoneScolding");
         HandleStateChange(ManagerState.Patrol);
         saucer.transform.position = new Vector3(100f, 100f, 100f);
         controller.EnableMovement(false);
@@ -265,6 +271,7 @@ public class AlienManager : MonoBehaviour
         {
             child.Tend();
         }
+        managerAnim.SetTrigger("DoneCalming");
         HandleStateChange(ManagerState.Patrol);
     }
 
@@ -276,10 +283,12 @@ public class AlienManager : MonoBehaviour
         float randomX = Random.Range(-walkPointRange, walkPointRange);
 
         walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
-        
+        //managerAnim.SetBool("isWalking", true);
+
         if (Physics.Raycast(new Vector3(walkPoint.x, walkPoint.y + 5f, walkPoint.z), Vector3.down, 10f, whatIsGround))
         {
             walkPointSet |= true;
+            
         }
     }
     private void CheckPlayerMask()
