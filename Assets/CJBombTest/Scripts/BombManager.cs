@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BombManager : MonoBehaviour
 {
@@ -76,6 +77,7 @@ public class BombManager : MonoBehaviour
         {
             //you win
             Debug.Log("You win!");
+            SceneManager.LoadScene("WinScene");
         }
         else
         {
