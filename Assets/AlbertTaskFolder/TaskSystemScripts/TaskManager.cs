@@ -190,7 +190,7 @@ public class TaskManager : MonoBehaviour
                 }
                 else //task is not complete
                 {
-                    string taskName = listOfTasks[i].name;
+                    string taskName = listOfTasks[i].taskInfo.taskNameText;
                     listOfTaskNames[i].text = taskName;
 
                 }

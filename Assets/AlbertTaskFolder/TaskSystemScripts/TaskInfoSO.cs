@@ -3,10 +3,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "TaskInfoSO", menuName = "Scriptable Objects/TaskInfoSO")]
 public class TaskInfoSO : ScriptableObject
 {
-    [SerializeField] private string taskNameText;
-    [SerializeField] private int timeWhenTaskIsDue;
-    [SerializeField] private int timeToShowForTask;
+    [SerializeField] public string taskNameText;
+    [SerializeField] public int timeWhenTaskIsDue;
+    [SerializeField] public int timeToShowForTask;
 
     [TextArea(3, 10)]
-    [SerializeField] private string taskInfoText;
+    [SerializeField] public string taskInfoText;
 }
