@@ -9,6 +9,10 @@ public class AlienManager : MonoBehaviour
 {
     // i am SO sorry i just put everythong here i deserve death by firiing squad
     //                                                  - chopped chungus chud
+    [Header("Animation")]
+    [SerializeField] private Animator managerAnim;
+
+
     public static AlienManager Instance { get; private set; }
     public List<Child> children;
     public enum ManagerState
@@ -101,6 +105,7 @@ public class AlienManager : MonoBehaviour
                 Debug.Log("changing state to patrol");
                 break;
             case ManagerState.Tending:
+                //managerAnim.SetTrigger()
                 agent.speed /= speedBoost;
                 agent.ResetPath();
                 findingChild = false;
@@ -144,6 +149,7 @@ public class AlienManager : MonoBehaviour
 
         if (walkPointSet)
         {
+            managerAnim.SetBool("IsWallking", true);
             agent.SetDestination(walkPoint);
             // managerAnim.SetBool("IsWalking", true);
         }
@@ -157,6 +163,7 @@ public class AlienManager : MonoBehaviour
         
         if (distanceToWalkPoint.magnitude < 1f)
         {
+            managerAnim.SetBool("IsWallking", false);
             walkPointSet = false;
             // managerAnim.SetBool("IsWalking", false);
         }
@@ -167,6 +174,7 @@ public class AlienManager : MonoBehaviour
         timeTended += Time.deltaTime;
         if (timeTended >= childCareTime)
         {
+
             timeTended = 0f;
             HandleChildren();
         }
