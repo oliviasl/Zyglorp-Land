@@ -23426,6 +23426,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 443808495}
     - target: {fileID: 2682615933181255878, guid: c0a4db5edf1a1734aa3185a4426ee054, type: 3}
+      propertyPath: timeAnHourTakes
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 2682615933181255878, guid: c0a4db5edf1a1734aa3185a4426ee054, type: 3}
       propertyPath: completeTaskUICanvas
       value: 
       objectReference: {fileID: 144891333}
@@ -36220,7 +36224,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1526702870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46448,7 +46452,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1941964482
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49869,7 +49873,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2101180391
 MonoBehaviour:
   m_ObjectHideFlags: 0
