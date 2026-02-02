@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using TMPro;
 
 public class HourglassPuzzle : Puzzle
 {
@@ -11,10 +12,7 @@ public class HourglassPuzzle : Puzzle
     int HourglassCounter = 0;
 
     [SerializeField] Animator hourglassAnim;
-
-    void Start()
-    {
-    }
+    [SerializeField] TMP_Text hourglassCounter;
 
     public void Hourglassed()
     {
@@ -34,15 +32,14 @@ public class HourglassPuzzle : Puzzle
         Debug.Log("Flipped hourglass at timestamp : " + Time.time);
         Flippable = false;
         hourglassAnim.SetBool("flip", true);
-        yield return null;
-        hourglassAnim.SetBool("flip", false);
-
         yield return new WaitForSeconds(HourglassTimer);
+        hourglassAnim.SetBool("flip", false);
 
         BombManager.instance.GetBAM().DingSFX();
         Flippable = true;
         Debug.Log("Hourglass finished at timestamp : " + Time.time);
         HourglassCounter++;
+        hourglassCounter.text = (Count - HourglassCounter).ToString();
         if (HourglassCounter == Count)
         {
             base.Solve();
