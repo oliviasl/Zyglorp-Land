@@ -32,6 +32,7 @@ public class GlorpIt : Puzzle
 
     public void BeginGlorp()
     {
+        AudioManager.instance.bombMusic.volume = 0.4f;
         NewClip();
     }
 
@@ -94,6 +95,7 @@ public class GlorpIt : Puzzle
             if (currentClip == answers.Length)
             {
                 base.Solve();
+                AudioManager.instance.bombMusic.volume = 1f;
             }
             else
             {
@@ -114,6 +116,7 @@ public class GlorpIt : Puzzle
         //play failure noise
         BombManager.instance.GetBAM().FailureSFX();
         StopCoroutine(currentCoroutine);
+        AudioManager.instance.bombMusic.volume = 1f;
 
         //TEMP MEASURE:
         //tempIndicator.text = "START!";
