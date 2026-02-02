@@ -38,6 +38,8 @@ public class GlorpIt : Puzzle
 	// called by bomb animaiton manager
     public void Glorp(int ans)
     {
+        animators[ans].ResetTrigger("glorping");
+        animators[ans].SetTrigger("glorping");
         if(ans == answers[currentClip] && takingAnswers)
         {
             if(ans == 0)

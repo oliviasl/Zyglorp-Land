@@ -8,9 +8,4 @@ public class bombAnimManager : MonoBehaviour
     {
         BombManager.instance.UpdateAllFaces();
     }
-
-    public void SendGlorp(int ans)
-    {
-        glorp.Glorp(ans);
-    }
 }
