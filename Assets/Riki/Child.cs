@@ -8,6 +8,8 @@ namespace Manager
     {
         [Header("Animation")]
         [SerializeField] private Animator kidAnim;
+
+        public bool kicked;
         public enum ChildState
         {
             Patrol,
@@ -149,6 +151,10 @@ namespace Manager
         {
             HandleStateChange(ChildState.Abused);
             kidAnim.SetTrigger("KidShoved");
+            if (!kicked && BombManager.instance.transform)
+            {
+                
+            }
         }
 
         public void Tend()

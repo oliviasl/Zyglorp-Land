@@ -77,44 +77,7 @@ public class HelmetHandler : MonoBehaviour
 
             Debug.Log("helmet on");
 
-            if (!AudioManager.instance.bombMusic.isPlaying)
-            {
-                Debug.Log("no music playing");
-                if (AlienManager.Instance.state == AlienManager.ManagerState.Chase)
-                {
-                    //play low with manager chasing
-                    AudioManager.instance.bombMusic.clip = AudioManager.instance.lowBombMangMusic;
-                    AudioManager.instance.bombMusic.Play();
-                }
-                else
-                {
-                    //play just low music
-                    AudioManager.instance.bombMusic.clip = AudioManager.instance.lowBombMusic;
-                    AudioManager.instance.bombMusic.Play();
-                }
-                
-            }
-            else if(AlienManager.Instance.state == AlienManager.ManagerState.Chase)
-            {
-                Debug.Log("chasing");
-                if (AudioManager.instance.bombMusic.clip == AudioManager.instance.highBombMangMusic)
-                {
-                    AudioManager.instance.bombMusic.clip = AudioManager.instance.lowBombMangMusic;
-                    AudioManager.instance.bombMusic.Play();
-                }
-            }
-            else
-            {
-                Debug.Log("manager regular");
-
-                if (AudioManager.instance.bombMusic.clip == AudioManager.instance.highBombMusic)
-                {
-                    AudioManager.instance.bombMusic.clip = AudioManager.instance.lowBombMusic;
-                    Debug.Log("Playing low music");
-                    AudioManager.instance.bombMusic.Play();
-                }
-             
-            }
+            PlayMusic(true);
             // do this for all the states, low, low mang, high, high mang
 
             //maskAnim.SetTrigger(triggerToPutOn);
@@ -134,44 +97,7 @@ public class HelmetHandler : MonoBehaviour
 
             audioSourceObj.transform.position = closeTransform.position;
 
-            if (!AudioManager.instance.bombMusic.isPlaying)
-            {
-                Debug.Log("no music");
-                if (AlienManager.Instance.state == AlienManager.ManagerState.Chase)
-                {
-                    //play low with manager chasing
-                    AudioManager.instance.bombMusic.clip = AudioManager.instance.highBombMangMusic;
-                    AudioManager.instance.bombMusic.Play();
-                }
-                else
-                {
-                    //play just high music
-                    AudioManager.instance.bombMusic.clip = AudioManager.instance.highBombMusic;
-                    AudioManager.instance.bombMusic.Play();
-                }
-
-            }
-            else if (AlienManager.Instance.state == AlienManager.ManagerState.Chase)
-            {
-                Debug.Log("chasing");
-                if (AudioManager.instance.bombMusic.clip == AudioManager.instance.lowBombMangMusic)
-                {
-                    AudioManager.instance.bombMusic.clip = AudioManager.instance.highBombMangMusic;
-                    AudioManager.instance.bombMusic.Play();
-                }
-            }
-            else
-            {
-                Debug.Log("regular patrol");
-                if (AudioManager.instance.bombMusic.clip == AudioManager.instance.lowBombMusic)
-                {
-                    AudioManager.instance.bombMusic.clip = AudioManager.instance.highBombMusic;
-                    Debug.Log("Playing high music");
-                    AudioManager.instance.bombMusic.Play();
-                }
-            }
-
-
+            PlayMusic(false);
         }
     }
 
@@ -240,5 +166,38 @@ public class HelmetHandler : MonoBehaviour
     public bool GetIsHelmetOn()
     {
         return _bIsHelmetOn;
+    }
+
+    public void PlayMusic(bool muffled)
+    {
+        AudioClip chase = (muffled) ? AudioManager.instance.lowBombMangMusic : AudioManager.instance.highBombMangMusic;
+        AudioClip regular = (muffled) ? AudioManager.instance.lowBombMusic : AudioManager.instance.highBombMusic;
+
+        if (!AudioManager.instance.bombMusic.isPlaying)
+        {
+            Debug.Log("no music");
+            if (AlienManager.Instance.state == AlienManager.ManagerState.Chase)
+            {
+                //play low with manager chasing
+                AudioManager.instance.bombMusic.clip = chase;
+            }
+            else
+            {
+                //play just high music
+                AudioManager.instance.bombMusic.clip = regular;
+            }
+
+        }
+        else if (AlienManager.Instance.state == AlienManager.ManagerState.Chase)
+        {
+            Debug.Log("chasing");
+            AudioManager.instance.bombMusic.clip = chase;
+        }
+        else
+        {
+            Debug.Log("regular patrol");
+            AudioManager.instance.bombMusic.clip = regular;
+        }
+        AudioManager.instance.bombMusic.Play();
     }
 }
