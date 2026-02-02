@@ -5071,6 +5071,7 @@ MonoBehaviour:
   - {fileID: 2997467659783798673}
   - {fileID: 1801280412324024185}
   ragebaitTimer: 10
+  appearTime: 0.1
   phone1: {fileID: 6899819402698445040}
   phone2: {fileID: 4556836258558906456}
   screen1: {fileID: 0}
@@ -6674,9 +6675,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Coffee Order:\n\na pumpkin spice\nuse gingerbread\norganic local milk,\na
-    shot of espresso, \nsignature ice topping,\nnot too sweet,\nnot too bitter,\na
-    pinch of salt\non top of ice.\n\nThanks"
+  m_text: "Coffee Order:\n\nAn extra-iced \ncoffee, use gingerbread\norganic local
+    milk,\na shot of espresso,\nwith more than 100% sugar,\nbut less than 200%,\nand
+    a pinch of salt\non top of the ice.\nMake it small."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b1fdf77e9d93540e3bd1c4b04e97bcc6, type: 2}
   m_sharedMaterial: {fileID: -8670364408808731638, guid: b1fdf77e9d93540e3bd1c4b04e97bcc6, type: 2}

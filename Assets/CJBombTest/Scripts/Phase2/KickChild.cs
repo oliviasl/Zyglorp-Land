@@ -17,7 +17,7 @@ public class KickChild : Puzzle
     {
         kickedChildren++;
         childText.text = kickedChildren.ToString();
-        if(kickedChildren >= requiredChildren)
+        if(kickedChildren >= requiredChildren && !base.GetSolved())
         {
             base.Solve();
         }

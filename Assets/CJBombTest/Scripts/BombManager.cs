@@ -5,6 +5,7 @@ public class BombManager : MonoBehaviour
     public static BombManager instance { get; private set; }
 
     [SerializeField] Phase[] phases; // the array holding all the puzzles of each phase
+    [SerializeField] KickChild kc;
     [SerializeField] int currentPhase = 0;
     [SerializeField] BombRotate rotator;
     [SerializeField] Animator bombAnimator;
@@ -37,6 +38,14 @@ public class BombManager : MonoBehaviour
     public int GetPhase()
     {
         return currentPhase;
+    }
+
+    public void KickCounter()
+    {
+        if(currentPhase == 1 && !kc.GetSolved())
+        {
+            kc.IncrementChildCounter();
+        } 
     }
 
     //gets called automatiaclly whenever a puzzle is Solved
